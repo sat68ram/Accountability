@@ -1,0 +1,365 @@
+<div class="vision-layout">
+
+  <!-- A. Portfolio Risk Dashboard -->
+  <div class="vision-row">
+    <section class="panel-light">
+      <div class="panel-header">Portfolio Risk Dashboard</div>
+      <div class="panel-sub">
+        Severity mix, critical risk exposure, and trend across the portfolio.
+      </div>
+
+      <!-- Total Open Risks by Severity (stacked bar) -->
+      <div class="risk-stacked-bar">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:0.9rem; font-weight:500; color:#4b5563;">
+            Total Open Risks
+          </div>
+          <div style="font-size:0.85rem; color:#6b7280;">
+            184 open � last updated 2 hours ago
+          </div>
+        </div>
+
+        <div class="risk-stacked-track">
+          <div class="risk-segment risk-low"  style="width:20%;"></div>
+          <div class="risk-segment risk-med"  style="width:35%;"></div>
+          <div class="risk-segment risk-high" style="width:30%;"></div>
+          <div class="risk-segment risk-crit" style="width:15%;"></div>
+        </div>
+
+        <div class="risk-stacked-legend">
+          <div class="risk-legend-item">
+            <span class="risk-legend-swatch risk-low"></span><span>Low � 37</span>
+          </div>
+          <div class="risk-legend-item">
+            <span class="risk-legend-swatch risk-med"></span><span>Medium � 64</span>
+          </div>
+          <div class="risk-legend-item">
+            <span class="risk-legend-swatch risk-high"></span><span>High � 55</span>
+          </div>
+          <div class="risk-legend-item">
+            <span class="risk-legend-swatch risk-crit"></span><span>Critical � 28</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 10 Critical Risks by Exposure -->
+      <div class="risk-list">
+        <div class="risk-row" style="font-weight:600; color:#6b7280;">
+          <div>#</div>
+          <div>Risk</div>
+          <div>Program</div>
+          <div>Owner</div>
+          <div>Exposure</div>
+        </div>
+
+        <div class="risk-row">
+          <div class="risk-id">R-101</div>
+          <div>3 nm PVD tool delivery to lead customer slips</div>
+          <div>3 nm PVD</div>
+          <div>PMO</div>
+          <div><span class="risk-exposure">0.92</span></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-id">R-087</div>
+          <div>Key plasma controller vendor at capacity</div>
+          <div>5 nm Etch</div>
+          <div>Supply Chain</div>
+          <div><span class="risk-exposure">0.88</span></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-id">R-132</div>
+          <div>Export license renewal delays for critical geography</div>
+          <div>Display Gen 8</div>
+          <div>Legal</div>
+          <div><span class="risk-exposure">0.84</span></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-id">R-119</div>
+          <div>Controls engineering bandwidth constraint</div>
+          <div>Capacity Upgrades</div>
+          <div>Engineering</div>
+          <div><span class="risk-exposure">0.80</span></div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-id">R-095</div>
+          <div>Field upgrade certification not aligned to fab downtime</div>
+          <div>Field Upgrades</div>
+          <div>CS</div>
+          <div><span class="risk-exposure">0.78</span></div>
+        </div>
+        <!-- You can add more to reach Top 10 -->
+      </div>
+
+      <!-- Risk Trend Over Time -->
+      <div class="chart-risk-trend">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <!-- grid -->
+          <g class="risk-grid">
+            <line x1="0" y1="10" x2="100" y2="10" />
+            <line x1="0" y1="20" x2="100" y2="20" />
+            <line x1="0" y1="30" x2="100" y2="30" />
+            <line x1="0" y1="40" x2="100" y2="40" />
+          </g>
+          <!-- axes -->
+          <line class="risk-axis" x1="5" y1="45" x2="95" y2="45" />
+          <line class="risk-axis" x1="5" y1="5" x2="5" y2="45" />
+
+          <!-- Open risks line (past 6 months) -->
+          <polyline class="risk-line-open"
+            points="5,15 22,18 39,22 56,27 73,32 90,35" />
+          <!-- Closed risks line -->
+          <polyline class="risk-line-closed"
+            points="5,40 22,36 39,33 56,30 73,27 90,24" />
+        </svg>
+      </div>
+
+      <!-- Likelihood vs Impact Heatmap -->
+      <div class="risk-heatmap">
+        <div class="risk-heat-grid">
+          <div></div>
+          <div class="risk-heat-header">Low Impact</div>
+          <div class="risk-heat-header">Medium Impact</div>
+          <div class="risk-heat-header">High Impact</div>
+
+          <div class="risk-heat-header">Low Likelihood</div>
+          <div class="risk-heat-cell risk-heat-low">6</div>
+          <div class="risk-heat-cell risk-heat-low">9</div>
+          <div class="risk-heat-cell risk-heat-med">4</div>
+
+          <div class="risk-heat-header">Medium Likelihood</div>
+          <div class="risk-heat-cell risk-heat-low">5</div>
+          <div class="risk-heat-cell risk-heat-med">11</div>
+          <div class="risk-heat-cell risk-heat-high">7</div>
+
+          <div class="risk-heat-header">High Likelihood</div>
+          <div class="risk-heat-cell risk-heat-med">3</div>
+          <div class="risk-heat-cell risk-heat-high">6</div>
+          <div class="risk-heat-cell risk-heat-high">7</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- B. Project Risk Drilldown -->
+  <div class="vision-row vision-row-2">
+    <!-- Risk Register -->
+    <section class="panel-light">
+      <div class="panel-header">Project Risk Register</div>
+      <div class="panel-sub">
+        Drilldown into risks by project, sortable by severity and exposure.
+      </div>
+
+      <div class="risk-register">
+        <table class="table-small">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Project</th>
+              <th class="sortable">Severity</th>
+              <th>Likelihood</th>
+              <th>Impact</th>
+              <th>Owner</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R-101</td>
+              <td>3 nm PVD</td>
+              <td>Critical</td>
+              <td>High</td>
+              <td>High</td>
+              <td>PMO</td>
+              <td><span class="pill-status pill-behind">Open</span></td>
+            </tr>
+            <tr>
+              <td>R-087</td>
+              <td>5 nm Etch</td>
+              <td>Critical</td>
+              <td>High</td>
+              <td>High</td>
+              <td>Supply Chain</td>
+              <td><span class="pill-status pill-risk">Mitigating</span></td>
+            </tr>
+            <tr>
+              <td>R-119</td>
+              <td>Capacity Upgrades</td>
+              <td>High</td>
+              <td>Medium</td>
+              <td>High</td>
+              <td>Engineering</td>
+              <td><span class="pill-status pill-risk">Mitigating</span></td>
+            </tr>
+            <tr>
+              <td>R-132</td>
+              <td>Display Gen 8</td>
+              <td>High</td>
+              <td>High</td>
+              <td>Medium</td>
+              <td>Legal</td>
+              <td><span class="pill-status pill-ontrack">Tracking</span></td>
+            </tr>
+            <tr>
+              <td>R-095</td>
+              <td>Field Upgrades</td>
+              <td>Medium</td>
+              <td>Medium</td>
+              <td>Medium</td>
+              <td>CS</td>
+              <td><span class="pill-status pill-ontrack">Open</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Gantt overlay & CPI/SPI correlation -->
+    <section class="panel-light">
+      <div class="panel-header">Schedule & Performance Correlation</div>
+      <div class="panel-sub">
+        Risk windows overlaid on schedule and CPI/SPI trends.
+      </div>
+
+      <!-- Gantt overlay -->
+      <div class="risk-gantt">
+        <div class="risk-gantt-row">
+          <div class="risk-gantt-label">3 nm PVD</div>
+          <div class="risk-gantt-track">
+            <div class="risk-gantt-window" style="left:10%; width:35%;"></div>
+          </div>
+        </div>
+        <div class="risk-gantt-row">
+          <div class="risk-gantt-label">5 nm Etch</div>
+          <div class="risk-gantt-track">
+            <div class="risk-gantt-window" style="left:25%; width:40%;"></div>
+          </div>
+        </div>
+        <div class="risk-gantt-row">
+          <div class="risk-gantt-label">Display Gen 8</div>
+          <div class="risk-gantt-track">
+            <div class="risk-gantt-window" style="left:35%; width:30%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CPI/SPI correlation -->
+      <div class="chart-cpi-spi">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <!-- grid -->
+          <g class="cpi-spi-grid">
+            <line x1="0" y1="10" x2="100" y2="10" />
+            <line x1="0" y1="20" x2="100" y2="20" />
+            <line x1="0" y1="30" x2="100" y2="30" />
+            <line x1="0" y1="40" x2="100" y2="40" />
+          </g>
+          <!-- axes -->
+          <line class="cpi-spi-axis" x1="5" y1="45" x2="95" y2="45" />
+          <line class="cpi-spi-axis" x1="5" y1="5" x2="5" y2="45" />
+
+          <!-- CPI (cost) -->
+          <polyline class="line-cpi"
+            points="5,25 25,27 45,29 65,32 85,35" />
+          <!-- SPI (schedule) -->
+          <polyline class="line-spi"
+            points="5,25 25,23 45,21 65,24 85,28" />
+        </svg>
+        <div style="margin-top:4px; font-size:0.75rem; color:#6b7280;">
+          CPI &gt; 1 with SPI &lt; 1 often coincides with high risk windows.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- C. Risk Owner View -->
+  <div class="vision-row">
+    <section class="panel-light">
+      <div class="panel-header">Risk Owner View</div>
+      <div class="panel-sub">
+        Ownership, closure rates, and on-time mitigation by team.
+      </div>
+
+      <div class="risk-owner-grid">
+        <!-- PMO -->
+        <div class="owner-card">
+          <div style="font-weight:600;">PMO</div>
+          <div class="owner-metric-row">
+            <span># Owned</span><span>38</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>Open / Closed</span><span>14 / 24</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>On-time mitigated</span><span>82%</span>
+          </div>
+          <div class="owner-bar">
+            <div class="owner-bar-fill" style="width:82%;"></div>
+          </div>
+          <div style="margin-top:4px;">
+            <span class="owner-chip-good">Healthy</span>
+          </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="owner-card">
+          <div style="font-weight:600;">Engineering</div>
+          <div class="owner-metric-row">
+            <span># Owned</span><span>54</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>Open / Closed</span><span>21 / 33</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>On-time mitigated</span><span>74%</span>
+          </div>
+          <div class="owner-bar">
+            <div class="owner-bar-fill" style="width:74%;"></div>
+          </div>
+          <div style="margin-top:4px;">
+            <span class="owner-chip-good">Watch</span>
+          </div>
+        </div>
+
+        <!-- Supply Chain -->
+        <div class="owner-card">
+          <div style="font-weight:600;">Supply Chain</div>
+          <div class="owner-metric-row">
+            <span># Owned</span><span>29</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>Open / Closed</span><span>13 / 16</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>On-time mitigated</span><span>61%</span>
+          </div>
+          <div class="owner-bar">
+            <div class="owner-bar-fill" style="width:61%;"></div>
+          </div>
+          <div style="margin-top:4px;">
+            <span class="owner-chip-risk">Overdue</span>
+          </div>
+        </div>
+
+        <!-- Customer Success -->
+        <div class="owner-card">
+          <div style="font-weight:600;">Customer Success</div>
+          <div class="owner-metric-row">
+            <span># Owned</span><span>23</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>Open / Closed</span><span>8 / 15</span>
+          </div>
+          <div class="owner-metric-row">
+            <span>On-time mitigated</span><span>88%</span>
+          </div>
+          <div class="owner-bar">
+            <div class="owner-bar-fill" style="width:88%;"></div>
+          </div>
+          <div style="margin-top:4px;">
+            <span class="owner-chip-good">Strong</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>

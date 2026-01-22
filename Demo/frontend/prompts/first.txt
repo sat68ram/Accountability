@@ -1,0 +1,203 @@
+First layout:  Company Vision  on the left top - right top a link to Chat with Enterprise Memory ( a RAG/LLM ); Next row - 3 tabs - one for Month/Quarter and Year each.; Next row - 3 cards - one for Revenue 65%; Profitability 32%; One for timelines 78%; The next row - 3 cards. One for Customer Happiness 65%; Cost 72%; Governance 89% Next row - two cards - one with semi circular dial chart - Red/Yellow/Green Timelines - a drill down button and an action button. The next card is all about drill down - on Objectives/Key Results/Actions - followed by a few rows of some objectives..Use colors appropriately keeping the layout as suggested before.
+
+Revenue Layout:
+This screen purpose is to layout revenue components so that it can be diced and sliced as the user wishes.
+Keep the styles as before. 
+At the top row - Company revenue card wiht 3 numbers : YTD Revenue, YoY growth percentage, QoQ growth percentage
+Next row - Business segment level revenue - for eg.,Semiconductor Systems, Applied Global Services, Display & Adjacent technologies - showing segment revenue and segment operating margin..
+Next row - Product Line revenue - scrollable -  eg., FAB products, Display, Packaging Tools - Revenue per PL, Avg Selling Price, Shipment Count
+Next row - Product / SKU revenue - scrollable - sku, selling price, discount applied
+Next row - Revenue By Region and Revenue by Customer - both scrollable. By region shows Region, Revenue and by cusotmer shows customer name and revenue
+Keep the layout close to the vision. Use of grid and cards as before.
+
+Profitability
+
+Top KPIs: Revenue | Gross Margin % | Opex % | Operating Profit %
+Charts:
+
+Quarterly margin trend per product line
+
+Gross profit waterfall: Bookings ? Shipments ? Revenue ? Profit
+
+Regional profitability heatmap
+
+Customer margin scatter: Gross margin % vs revenue
+
+Lifecycle profit view: Installed base ? Service cost ? Total margin
+
+This Screen Matches the Vision Pattern Exactly
+? Uses
+
+vision-layout
+
+vision-row, vision-row-2, vision-row-3
+
+panel-light with header + subtext
+
+metric-card styles
+
+Scrollable regions if needed
+
+Card-style chart placeholders suitable for React chart libraries later
+
+? All charts are created as standardized panel cards, so when you React-ify:
+
+Replace placeholders with <LineChart/>, <Scatter/>, <Heatmap/>, <Waterfall/> components easily.
+---
+
+Can you add some dummy charts to the above and include css, js as needed..to make the mock look real
+---
+For Timeliness/Projects - keeping the same styles - create a dashboard covering
+
+A. Portfolio Overview
+Total Active Projects | Avg Duration | Total Spend YTD
+
+Pie: % by Segment ? R&D, Capacity, Field Upgrades, IT
+
+KPI Tiles: On-Time %, Budget Adherence %, Risk Exposure Index
+
+B. Schedule Health
+Gantt / Milestone burn-down by major programs (e.g., 3 nm PVD, 5 nm Etch)
+
+Slippage trend (past 3 months)
+
+Critical Path summary table
+
+C. Financial Health
+Portfolio budget vs actual (stacked bar)
+
+Cumulative EV / AC / PV chart
+
+Top 5 over-run projects
+
+D. Resource Utilization
+Heat map of engineering group utilization
+
+Top constrained skills (e.g., Controls, Plasma, Robotics)
+
+E. Risk & Issues
+Risk bubble chart (Impact × Likelihood)
+
+Issue resolution SLA trend
+
+Export-compliance exceptions
+
+F. Gate / Readiness Summary
+% Complete by Gate (Concept ? Prototype ? Pilot ? Release)
+
+Design maturity & qualification yields
+
+Use css/js as required to create mocks.
+
+Customer Happiness
+
+Create a screen for customer happiness dashboard keeping the styles as before. Add css/js as required for mocks.
+
+A. Customer Happiness Overview (Exec Dashboard)
+Average CSAT by Customer ? bar chart (TSMC 4.7, Samsung 4.5, Intel 4.2…)
+
+NPS Trend by Quarter ? line chart
+
+Top-5 Drivers (VOC Themes) ? text cloud or sentiment categories
+
+OTD vs CSAT Correlation ? scatter plot (projects that slip ? lower CSAT)
+
+B. Account-Level View
+NPI Project Satisfaction (delivery & acceptance)
+
+Field Service Performance (MTBF/MTTR/SLA)
+
+Support Ticket Volume trend
+
+Rolling 12-month NPS and CSAT correlation with renewal %
+
+C. Alerts / Health Scores
+A Customer Health Score can combine weighted metrics:
+
+Health = 0.25*CSAT + 0.25*NPS_norm + 0.2*OTD_norm + 0.15*SLA_norm + 0.15*(1 - Issue Rate)
+---
+Create a screen for Risks dashboard keeping the styles as before. Add css as needed.
+
+A. Portfolio Risk Dashboard
+
+Total Open Risks by Severity (stacked bar)
+
+Top 10 Critical Risks by Exposure Score - rows
+
+Risk Trend Over Time (open ? closed) - line graph
+
+Heat Map: Likelihood vs Impact
+
+B. Project Risk Drilldown
+
+Risk Register table (sortable by severity)
+
+Gantt overlay: risk open/close windows
+
+Correlation with CPI/SPI (see if delays align with risk spikes)
+
+C. Risk Owner View
+
+#Risks Owned / Open / Closed per team
+
+% Mitigated on time vs overdue
+---
+
+Human Capital
+
+Create a screen for Human Capital dashboard. Use data and charts as needed. add css as required.
+
+A. Portfolio Human Capital Overview
+Total Headcount by Function / Region
+
+Utilization % heatmap
+
+Attrition trend (rolling 12M)
+
+Training investment per employee
+
+Critical skill capacity vs demand (e.g., “Vacuum Process Engineers: 25 needed, 19 available”)
+
+B. Project Workforce View
+Resource allocation per project (hours/month)
+
+Key skill coverage vs required matrix
+
+CPI vs utilization correlation
+
+Overbooked individuals alert list
+
+C. Talent Development View
+Certification coverage (% staff certified on new platform)
+
+Avg Training Hours/FTE by function
+
+High-potential talent pipeline
+---
+Create a Supply chain visibility dashboard keeping the styles as before. Add css as needed. Use data and charts as needed.
+
+A. Executive SCM Overview
+On-Time Delivery % (by supplier, region, category)
+
+Average delay days trend
+
+Supplier performance quartiles
+
+Freight spend by region
+
+Revenue at risk (open delayed POs)
+
+B. Supplier Scorecard
+Supplier	OTD %	Avg Delay	Defect %	Risk Tier	Score
+Foxconn	95.2	1.8	0.6	Tier 1	91
+Advantest	88.5	4.2	0.8	Tier 2	79
+XYZ Precision	82.3	6.1	1.3	Single	65
+C. Inventory & Logistics
+Days of Supply trend by site
+
+Stockout alerts
+
+In-transit shipments by region
+
+Cost of expedite shipments
+----

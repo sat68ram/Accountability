@@ -1,0 +1,52 @@
+Suggested folder structure to move from generated HTML to React+Tailwind app.
+
+enterprise-accountability/
++-- public/
+¦   +-- favicon.ico           # (optional) static assets served as-is
+¦   +-- logo.png              # (optional)
+¦
++-- src/
+¦   +-- styles/
+¦   ¦   +-- base.css          # your original base styles (from uploaded file)
+¦   ¦   +-- vision.css        # vision-* and dashboard styles
+¦   ¦
+¦   +-- screens/              # HTML "screen" templates (still plain HTML today)
+¦   ¦   +-- company-vision.html
+¦   ¦   +-- login.html        # your original Grid Login Page (optional)
+¦   ¦
+¦   +-- shell/
+¦   ¦   +-- index-shell.html  # the “master shell” with header/footer/main
+¦   ¦
+¦   +-- js/
+¦   ¦   +-- screen-loader.js  # small script that loads a screen into <main>
+¦   ¦
+¦   +-- react/                # future React world (empty for now)
+¦       +-- App.tsx
+¦       +-- main.tsx
+¦       +-- components/
+¦
++-- index.html                # dev entry (can just redirect/iframe shell for now)
++-- package.json              # later when you init npm / Vite / CRA
+
+Why this structure is React/Tailwind-friendly later
+
+When you’re ready to flip to React + Tailwind, you can:
+
+Initialize Vite (or CRA) in the same repo
+
+src/react/main.tsx, src/react/App.tsx etc.
+
+Gradually copy markup from src/screens/*.html into React components:
+
+CompanyVision.tsx
+
+TimelineDial.tsx
+
+OKRTable.tsx
+
+Replace class names with Tailwind utilities incrementally, or use the existing CSS while you transition.
+
+Eventually, index-shell.html ? index.html for Vite, and React Router replaces screen-loader.js.
+
+You get a clean migration path:
+static ? hybrid ? full React/Tailwind, without throwing away any work.

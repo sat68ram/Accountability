@@ -1,0 +1,2337 @@
+/* === VISION-SPECIFIC SHARED STYLES === */
+
+.vision-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vision-row {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+.vision-row-2 {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+
+.vision-row-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vision-row-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.vision-row-bottom {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+@media (max-width: 900px) {
+  .vision-row-2,
+  .vision-row-3,
+  .vision-row-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-dark {
+  background: #111827;
+  color: #e5e7eb;
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-light {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-header {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.panel-sub {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #111827;
+  background: #ffffff;
+}
+
+.link-pill:hover {
+  background: #f3f4f6;
+}
+
+/* Tabs */
+
+.vision-tab-row {
+  display: inline-flex;
+  border-radius: 999px;
+  background: #e5e7eb;
+  padding: 2px;
+  gap: 2px;
+}
+
+.vision-tab-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.vision-tab-btn.active {
+  background: #111827;
+  color: #f9fafb;
+}
+
+/* Metric cards */
+
+.metric-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.metric-good {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+}
+
+.metric-warn {
+  background: #fefce8;
+  border-color: #facc15;
+}
+
+.metric-risk {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+/* Dial */
+
+.dial-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dial {
+  position: relative;
+  width: 220px;
+  height: 110px;
+  border-radius: 220px 220px 0 0;
+  overflow: hidden;
+  background: linear-gradient(to right, #ef4444, #facc15, #22c55e);
+  margin: 0 auto;
+}
+
+.dial-inner {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  height: 90%;
+  background: #111827;
+  transform: translateX(-50%);
+  rotate: 25deg;
+}
+
+.dial-center {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #111827;
+  border: 3px solid #e5e7eb;
+}
+
+.dial-legend {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* OKRs table */
+
+.okrs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.okrs-table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.okrs-table th {
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pill-status {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.pill-ontrack { background: #ecfdf3; color: #166534; }
+.pill-risk    { background: #fef3c7; color: #92400e; }
+.pill-behind  { background: #fee2e2; color: #b91c1c; }
+
+/* === Profitability screen chart styles === */
+
+.chart-card {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+}
+
+/* Line chart (Quarterly Margin Trend) */
+.chart-line-wrapper {
+  width: 100%;
+  height: 220px;
+}
+
+.chart-line {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-line-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.chart-line-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.chart-line-series-1 {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.6;
+}
+
+.chart-line-series-2 {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.6;
+}
+
+.chart-line-series-3 {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.6;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chart-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+/* Waterfall (Bookings -> Shipments -> Revenue -> Profit) */
+.chart-waterfall {
+  margin-top: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 220px;
+  padding: 0 8px 8px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.wf-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.wf-bar {
+  width: 26px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(to top, #0f172a, #4b5563);
+  position: relative;
+}
+
+.wf-bar.positive {
+  background: linear-gradient(to top, #16a34a, #4ade80);
+}
+
+.wf-bar.neutral {
+  background: linear-gradient(to top, #6b7280, #d1d5db);
+}
+
+.wf-bar.negative {
+  background: linear-gradient(to top, #b91c1c, #fecaca);
+}
+
+.wf-value {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Heatmap */
+.chart-heatmap {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.heatmap-row {
+  display: flex;
+  gap: 6px;
+}
+
+.heatmap-cell {
+  flex: 1;
+  border-radius: 8px;
+  padding: 8px 6px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heatmap-label {
+  color: #111827;
+}
+
+.heatmap-value {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* intensity levels */
+.hm-low {
+  background: #ecfdf3;
+}
+
+.hm-mid {
+  background: #fefce8;
+}
+
+.hm-high {
+  background: #fee2e2;
+}
+
+/* Scatter chart */
+.chart-scatter {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 240px;
+  position: relative;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.scatter-axis {
+  position: absolute;
+  left: 8%;
+  bottom: 10%;
+  width: 80%;
+  height: 70%;
+  border-left: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.scatter-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(37,99,235,0.85);
+  transform: translate(-50%, 50%);
+  cursor: default;
+}
+
+.scatter-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.scatter-dot:hover::after {
+  opacity: 1;
+}
+
+/* Lifecycle profit view */
+.chart-lifecycle {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lifecycle-step {
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+.lifecycle-title {
+  font-weight: 600;
+  color: #111827;
+}
+
+.lifecycle-metric {
+  color: #4b5563;
+}
+
+.lifecycle-bar {
+  margin-top: 4px;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: #d1d5db;
+  overflow: hidden;
+}
+
+.lifecycle-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22c55e, #4ade80);
+}
+
+/* Small axis labels for scatter */
+.scatter-label-x,
+.scatter-label-y {
+  position: absolute;
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+.scatter-label-x {
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scatter-label-y {
+  left: 2%;
+  top: 32%;
+  transform: rotate(-90deg);
+}
+
+/* === Timeliness / Projects dashboard chart styles === */
+
+/* Generic chart card wrapper */
+.chart-block {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+}
+
+/* A. Portfolio Overview – Pie chart */
+.chart-pie-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chart-pie {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #3b82f6 0 30%,
+      #22c55e 30% 55%,
+      #f97316 55% 80%,
+      #a855f7 80% 100%
+    );
+}
+
+.chart-pie-inner {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: #f9fafb;
+}
+
+.chart-pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.chart-pie-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-pie-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+/* KPI tiles row inside sections */
+.kpi-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* B. Schedule Health – Gantt + burndown */
+
+.chart-gantt {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+
+.gantt-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.gantt-label {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.gantt-track {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.gantt-bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22c55e, #4ade80);
+}
+
+.gantt-bar.at-risk {
+  background: linear-gradient(to right, #f97316, #facc15);
+}
+
+.gantt-bar.late {
+  background: linear-gradient(to right, #ef4444, #fecaca);
+}
+
+/* Burndown mini-chart */
+.chart-burndown {
+  margin-top: 12px;
+  height: 180px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+}
+
+.chart-burndown svg {
+  width: 100%;
+  height: 100%;
+}
+
+.burndown-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.burndown-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.burndown-ideal {
+  fill: none;
+  stroke: #9ca3af;
+  stroke-dasharray: 2 2;
+  stroke-width: 1.2;
+}
+
+.burndown-actual {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.6;
+}
+
+/* Critical path summary table */
+.table-small {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.table-small th,
+.table-small td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.table-small th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-small tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* C. Financial Health – stacked bars + EV/AC/PV */
+
+.chart-stacked-bars {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.stacked-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.stacked-label {
+  color: #4b5563;
+}
+
+.stacked-bar {
+  height: 14px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  display: flex;
+}
+
+.stacked-segment {
+  height: 100%;
+}
+
+.stacked-budget {
+  background: #bfdbfe;
+}
+
+.stacked-actual {
+  background: #3b82f6;
+}
+
+/* EV/AC/PV small line chart */
+.chart-evacpv {
+  margin-top: 12px;
+  height: 200px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+}
+
+.chart-evacpv svg {
+  width: 100%;
+  height: 100%;
+}
+
+.evacpv-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.evacpv-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.line-ev {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.5;
+}
+
+.line-ac {
+  fill: none;
+  stroke: #ef4444;
+  stroke-width: 1.5;
+}
+
+.line-pv {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+}
+
+/* Top over-run projects list */
+.overrun-list {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.overrun-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overrun-label {
+  color: #4b5563;
+}
+
+.overrun-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.75rem;
+}
+
+/* D. Resource Utilization */
+
+.chart-heatmap-util {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+
+.util-row {
+  display: grid;
+  grid-template-columns: 120px repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  align-items: center;
+}
+
+.util-label {
+  color: #4b5563;
+}
+
+.util-cell {
+  border-radius: 6px;
+  padding: 4px 0;
+  text-align: center;
+  color: #111827;
+}
+
+.util-low {
+  background: #e0f2fe;
+}
+
+.util-med {
+  background: #bfdbfe;
+}
+
+.util-high {
+  background: #60a5fa;
+}
+
+.util-crit {
+  background: #1d4ed8;
+  color: #f9fafb;
+}
+
+/* Top constrained skills */
+.skill-list {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 40px;
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #f97316, #ef4444);
+}
+
+/* E. Risk & Issues – bubbles + SLA trend */
+
+.chart-bubble {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 220px;
+  position: relative;
+  padding: 8px;
+}
+
+.bubble-axis {
+  position: absolute;
+  left: 10%;
+  bottom: 15%;
+  width: 78%;
+  height: 70%;
+  border-left: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.bubble-dot {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.85);
+  transform: translate(-50%, 50%);
+  cursor: default;
+}
+
+.bubble-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.bubble-dot:hover::after {
+  opacity: 1;
+}
+
+.bubble-label-x,
+.bubble-label-y {
+  position: absolute;
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+.bubble-label-x {
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble-label-y {
+  left: 4%;
+  top: 35%;
+  transform: rotate(-90deg);
+}
+
+/* SLA trend mini chart */
+
+.chart-sla {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 160px;
+  padding: 8px;
+}
+
+.chart-sla svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sla-line {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.6;
+}
+
+/* F. Gate / Readiness Summary */
+
+.chart-gates {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.gate-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 40px;
+  gap: 8px;
+  align-items: center;
+}
+
+.gate-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.gate-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #3b82f6, #22c55e);
+}
+
+/* Design maturity cards */
+.maturity-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.maturity-card {
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #e5e7eb;
+  font-size: 0.8rem;
+}
+
+.maturity-title {
+  font-weight: 600;
+  color: #111827;
+}
+
+.maturity-metric {
+  color: #4b5563;
+}
+
+/* === Customer Happiness dashboard styles === */
+
+/* Horizontal bar chart for CSAT by customer */
+.chart-bars {
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 40px;
+  gap: 8px;
+  align-items: center;
+}
+
+.bar-label {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #3b82f6, #22c55e);
+}
+
+/* NPS trend line chart */
+.chart-nps {
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 220px;
+}
+
+.chart-nps svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nps-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.nps-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.nps-line {
+  fill: none;
+  stroke: #0ea5e9;
+  stroke-width: 1.8;
+}
+
+/* VOC text cloud */
+.voc-cloud {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.voc-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.voc-pos {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.voc-neg {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.voc-neutral {
+  background: #fefce8;
+  color: #92400e;
+}
+
+/* OTD vs CSAT scatter (reuse scatter style) */
+.chart-scatter-small {
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 220px;
+  position: relative;
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* reuse .scatter-axis, .scatter-dot, .scatter-label-x, .scatter-label-y
+   from existing profitability screen */
+
+/* Account-level cards */
+.account-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.account-card {
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Ticket volume trend */
+.chart-tickets {
+  margin-top: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 160px;
+  padding: 6px;
+}
+
+.chart-tickets svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tickets-bars rect {
+  fill: #3b82f6;
+  opacity: 0.8;
+}
+
+/* NPS/CSAT vs renewal */
+.chart-renew {
+  margin-top: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  height: 180px;
+  padding: 6px;
+}
+
+.chart-renew svg {
+  width: 100%;
+  height: 100%;
+}
+
+.renew-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.renew-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.renew-nps {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+}
+
+.renew-csat {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.5;
+}
+
+.renew-rate {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.5;
+}
+
+/* Health score formula / alerts */
+.health-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .health-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.health-formula {
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+}
+
+.health-formula-code {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #111827;
+  color: #e5e7eb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.78rem;
+}
+
+.health-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
+
+.health-table th,
+.health-table td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.health-table th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.health-table tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+.health-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.health-good {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.health-watch {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.health-risk {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* === Risk dashboard styles === */
+
+/* Portfolio risk stacked bar */
+.risk-stacked-bar {
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+}
+
+.risk-stacked-track {
+  margin-top: 6px;
+  width: 100%;
+  height: 16px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  display: flex;
+}
+
+.risk-segment {
+  height: 100%;
+}
+
+.risk-low {
+  background: #bfdbfe;
+}
+
+.risk-med {
+  background: #facc15;
+}
+
+.risk-high {
+  background: #fb923c;
+}
+
+.risk-crit {
+  background: #ef4444;
+}
+
+.risk-stacked-legend {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #4b5563;
+}
+
+.risk-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.risk-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+/* Top critical risks list */
+.risk-list {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.risk-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1.6fr) 0.7fr 0.8fr 0.6fr;
+  gap: 6px;
+  align-items: center;
+}
+
+.risk-id {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.risk-exposure {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  text-align: center;
+}
+
+/* Risk trend line chart */
+.chart-risk-trend {
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 200px;
+}
+
+.chart-risk-trend svg {
+  width: 100%;
+  height: 100%;
+}
+
+.risk-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.risk-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.risk-line-open {
+  fill: none;
+  stroke: #ef4444;
+  stroke-width: 1.6;
+}
+
+.risk-line-closed {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.6;
+}
+
+/* Likelihood vs Impact heatmap */
+.risk-heatmap {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  font-size: 0.78rem;
+}
+
+.risk-heat-grid {
+  display: grid;
+  grid-template-columns: 80px repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.risk-heat-header {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.risk-heat-cell {
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+}
+
+.risk-heat-low {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.risk-heat-med {
+  background: #fefce8;
+  color: #92400e;
+}
+
+.risk-heat-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Project risk drilldown – register */
+.risk-register {
+  margin-top: 10px;
+  max-height: 230px;
+  overflow: auto;
+}
+
+.risk-register th.sortable::after {
+  content: "?";
+  font-size: 0.7rem;
+  margin-left: 4px;
+  color: #9ca3af;
+}
+
+/* Risk Gantt overlay */
+.risk-gantt {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  font-size: 0.78rem;
+}
+
+.risk-gantt-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.risk-gantt-label {
+  color: #4b5563;
+}
+
+.risk-gantt-track {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.risk-gantt-window {
+  position: absolute;
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(239,68,68,0.8);
+}
+
+/* CPI/SPI correlation mini chart */
+.chart-cpi-spi {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 180px;
+}
+
+.chart-cpi-spi svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cpi-spi-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.cpi-spi-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.line-cpi {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.5;
+}
+
+.line-spi {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+}
+
+/* Risk owner view */
+.risk-owner-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .risk-owner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.owner-card {
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.owner-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.owner-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #3b82f6, #22c55e);
+}
+
+.owner-metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.owner-chip-good {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ecfdf3;
+  color: #166534;
+  font-size: 0.75rem;
+}
+
+.owner-chip-risk {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.75rem;
+}
+
+/* === Human Capital dashboard styles === */
+
+/* Generic section grids */
+.hc-two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .hc-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* KPI grid */
+.hc-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Headcount tables */
+.hc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.hc-table th,
+.hc-table td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.hc-table th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hc-table tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Attrition trend chart */
+.chart-attrition {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 180px;
+}
+
+.chart-attrition svg {
+  width: 100%;
+  height: 100%;
+}
+
+.attrition-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.attrition-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.attrition-line {
+  fill: none;
+  stroke: #ef4444;
+  stroke-width: 1.6;
+}
+
+/* Training investment and critical skills list */
+.hc-training-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .hc-training-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hc-skill-list {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.hc-skill-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 80px 80px;
+  gap: 8px;
+  align-items: center;
+}
+
+.hc-skill-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  text-align: center;
+}
+
+/* Project Workforce View */
+.hc-allocation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
+
+.hc-allocation-table th,
+.hc-allocation-table td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.hc-allocation-table th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hc-allocation-table tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Skill coverage matrix */
+.hc-matrix {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  font-size: 0.78rem;
+}
+
+.hc-matrix-grid {
+  display: grid;
+  grid-template-columns: 140px repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.hc-matrix-header {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.hc-matrix-cell {
+  border-radius: 8px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.hc-matrix-ok {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.hc-matrix-gap {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* CPI vs Util correlation */
+.chart-cpi-util {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 160px;
+}
+
+.chart-cpi-util svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cpi-util-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.cpi-util-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.cpi-util-line-util {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+}
+
+.cpi-util-line-cpi {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.5;
+}
+
+/* Overbooked individuals list */
+.hc-overbooked-list {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hc-overbooked-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 70px 90px;
+  gap: 8px;
+  align-items: center;
+}
+
+.hc-overbooked-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  text-align: center;
+}
+
+/* Talent Development View */
+.hc-talent-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: minmax(0,1.2fr) minmax(0,1.1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .hc-talent-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-cert {
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+}
+
+.cert-bar {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.cert-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22c55e, #4ade80);
+}
+
+/* Training hours bar chart */
+.chart-training {
+  margin-top: 8px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 160px;
+}
+
+.chart-training svg {
+  width: 100%;
+  height: 100%;
+}
+
+.training-bars rect {
+  fill: #3b82f6;
+  opacity: 0.85;
+}
+
+/* High-potential talent pipeline */
+.hc-pipeline {
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 50px;
+  gap: 8px;
+  align-items: center;
+}
+
+.pipeline-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.pipeline-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #0ea5e9, #6366f1);
+}
+
+/* === Supply Chain Visibility dashboard styles === */
+
+/* Generic layout helpers */
+.scm-two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .scm-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scm-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* OTD by supplier/region/category – simple table */
+.scm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.scm-table th,
+.scm-table td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.scm-table th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.scm-table tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Average delay days trend */
+.chart-delay-trend {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 180px;
+}
+
+.chart-delay-trend svg {
+  width: 100%;
+  height: 100%;
+}
+
+.delay-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.delay-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.delay-line {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.6;
+}
+
+/* Supplier performance quartiles */
+.scm-quartiles {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.scm-quartile-card {
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.scm-quartile-title {
+  font-weight: 600;
+  color: #111827;
+}
+
+.scm-quartile-metric {
+  color: #4b5563;
+}
+
+/* Freight spend by region – bar chart */
+.chart-freight {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 180px;
+}
+
+.chart-freight svg {
+  width: 100%;
+  height: 100%;
+}
+
+.freight-bars rect {
+  fill: #3b82f6;
+  opacity: 0.85;
+}
+
+/* Revenue at risk card */
+.scm-revrisk {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+/* Supplier scorecard table */
+.scm-score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.scm-score-table th,
+.scm-score-table td {
+  padding: 6px 4px;
+  text-align: left;
+}
+
+.scm-score-table th {
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.scm-score-table tr + tr td {
+  border-top: 1px solid #f3f4f6;
+}
+
+.scm-score-good {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ecfdf3;
+  color: #166534;
+  font-size: 0.75rem;
+}
+
+.scm-score-mid {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+}
+
+.scm-score-risk {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.75rem;
+}
+
+/* Inventory & Logistics */
+.chart-dos {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 180px;
+}
+
+.chart-dos svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dos-grid line {
+  stroke: #e5e7eb;
+  stroke-width: 0.3;
+}
+
+.dos-axis {
+  stroke: #9ca3af;
+  stroke-width: 0.6;
+}
+
+.dos-line {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 1.6;
+}
+
+/* Stockout alerts */
+.scm-alert-list {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scm-alert-row {
+  display: grid;
+  grid-template-columns: minmax(0,1.4fr) 90px 80px;
+  gap: 8px;
+  align-items: center;
+}
+
+.scm-alert-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  text-align: center;
+}
+
+/* In-transit shipments by region */
+.chart-intransit {
+  margin-top: 8px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 160px;
+}
+
+.chart-intransit svg {
+  width: 100%;
+  height: 100%;
+}
+
+.intransit-bars rect {
+  fill: #0ea5e9;
+  opacity: 0.85;
+}
+
+/* Cost of expedite shipments */
+.chart-expedite {
+  margin-top: 8px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  height: 160px;
+}
+
+.chart-expedite svg {
+  width: 100%;
+  height: 100%;
+}
+
+.expedite-line {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.6;
+}
+
+/* Container */
+.action-panel { margin-top: 12px; }
+
+/* Scrollable area: list + add form */
+.action-scroll {
+  margin-top: 10px;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  background: #fbfdff;
+  max-height: 420px;          /* key: scrollable */
+  overflow: auto;
+}
+
+/* List */
+.action-list { padding: 10px; }
+.action-row {
+  background: #ffffff;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.action-title { font-weight: 700; color: #111827; }
+.action-desc { margin-top: 4px; color: #4b5563; font-size: 0.92rem; line-height: 1.25rem; }
+
+.action-meta {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.meta-chip {
+  font-size: 0.85rem;
+  color: #374151;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.meta-label { color: #6b7280; margin-right: 6px; }
+
+/* Pills */
+.pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+/* Status styles */
+.status-open { color: #1f2937; background: #f9fafb; }
+.status-progress { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
+.status-blocked { color: #b45309; background: #fffbeb; border-color: #fde68a; }
+.status-done { color: #065f46; background: #ecfdf5; border-color: #a7f3d0; }
+.status-canceled { color: #6b7280; background: #f3f4f6; }
+
+/* Priority styles */
+.prio-low { color: #6b7280; background: #f3f4f6; }
+.prio-medium { color: #1f2937; background: #f9fafb; }
+.prio-high { color: #7c2d12; background: #fff7ed; border-color: #fed7aa; }
+.prio-critical { color: #991b1b; background: #fef2f2; border-color: #fecaca; }
+
+/* Empty */
+.action-empty { padding: 14px; color: #6b7280; }
+
+/* Add section */
+.action-add {
+  border-top: 1px dashed #e5e7eb;
+  padding: 12px;
+  background: #ffffff;
+}
+.action-add__title { font-weight: 700; color: #111827; margin-bottom: 10px; }
+
+/* Form */
+.action-form { display: grid; gap: 10px; }
+
+.action-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field { display: grid; gap: 6px; }
+.field--full { grid-column: 1 / -1; }
+
+.field__label { font-size: 0.82rem; color: #6b7280; font-weight: 600; }
+.field__input {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 8px 10px;
+  outline: none;
+  background: #fff;
+}
+.field__input:focus { border-color: #c7d2fe; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+
+.field__textarea { min-height: 70px; resize: vertical; }
+
+.action-error { color: #b91c1c; font-weight: 600; font-size: 0.9rem; }
+
+.action-actions { display: flex; justify-content: flex-end; }
+.btn {
+  border: 1px solid #111827;
+  background: #111827;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+

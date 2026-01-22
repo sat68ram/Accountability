@@ -1,0 +1,34 @@
+METRIC_ID,METRIC_NAME,METRIC_DESCRIPTION,METRIC_CATEGORY,UNIT_OF_MEASURE,AGGREGATION_TYPE,DATA_SOURCE,OWNER_DEPARTMENT,REFRESH_FREQUENCY,IS_ACTIVE,CREATED_AT
+M-0001,Total Sales,Total revenue generated across all channels,Sales & Revenue,USD,SUM,POS,South Store #1042,Weekly,TRUE,10/16/2025 3:50
+M-0002,Online Sales,Sales generated through e-commerce platform,Sales & Revenue,USD,SUM,E-Commerce,Midwest Store #1017,Quarterly,TRUE,10/16/2025 3:50
+M-0003,Average Basket Size,Average value of each customer transaction,Sales & Revenue,USD,AVG,POS,East Store #1030,Daily,TRUE,10/16/2025 3:50
+M-0004,Number of Transactions,Total number of transactions,Sales & Revenue,Count,SUM,POS,South Store #1042,Daily,TRUE,10/16/2025 3:50
+M-0005,Sales per Store,Average daily sales per store,Sales & Revenue,USD,AVG,POS,South DC 1,Weekly,TRUE,10/16/2025 3:50
+M-0006,Promotional Uplift,Increase in sales during promotions,Sales & Revenue,%,AVG,POS,South Store #1037,Weekly,TRUE,10/16/2025 3:50
+M-0007,On-Time Deliveries,Percentage of orders delivered on time,Operations,%,AVG,Logistics,West Store #1001,Quarterly,TRUE,10/16/2025 3:50
+M-0008,Inventory Turns,Number of times inventory is sold and replaced,Operations,Count,AVG,ERP,South Store #1042,Monthly,TRUE,10/16/2025 3:50
+M-0009,Out-of-Stock Rate,Percentage of products out of stock,Operations,%,AVG,Inventory System,East Store #1021,Daily,TRUE,10/16/2025 3:50
+M-0010,Order Fulfillment Rate,Percentage of orders fulfilled successfully,Operations,%,AVG,ERP,East Store #1029,Quarterly,TRUE,10/16/2025 3:50
+M-0011,Shrinkage Rate,Loss of inventory as a percentage of sales,Operations,%,AVG,ERP,West Store #1005,Quarterly,TRUE,10/16/2025 3:50
+M-0012,Delivery Lead Time,Average time taken to deliver orders,Operations,Days,AVG,Logistics,South Region,Monthly,TRUE,10/16/2025 3:50
+M-0013,Net Promoter Score,Customer satisfaction measured by NPS,Customer,Score,AVG,Survey,West Store #1006,Quarterly,TRUE,10/16/2025 3:50
+M-0014,Customer Retention Rate,Percentage of returning customers,Customer,%,AVG,CRM,East Store #1028,Daily,TRUE,10/16/2025 3:50
+M-0015,Loyalty Program Signups,Number of customers enrolled in loyalty program,Customer,Count,SUM,CRM,East Store #1024,Weekly,TRUE,10/16/2025 3:50
+M-0016,Customer Churn Rate,Percentage of customers lost over time,Customer,%,AVG,CRM,East Store #1027,Daily,TRUE,10/16/2025 3:50
+M-0017,Average Customer Spend,Average spend per customer,Customer,USD,AVG,POS,Midwest Store #1020,Quarterly,TRUE,10/16/2025 3:50
+M-0018,Customer Complaints,Number of customer complaints received,Customer,Count,SUM,CRM,East DC 1,Quarterly,TRUE,10/16/2025 3:50
+M-0019,Headcount,Total number of employees,HR / Workforce,Count,SUM,HRIS,Midwest Region,Daily,TRUE,10/16/2025 3:50
+M-0020,Attrition Rate,Percentage of employees leaving the company,HR / Workforce,%,AVG,HRIS,East Store #1028,Weekly,TRUE,10/16/2025 3:50
+M-0021,Training Hours,Total training hours completed,HR / Workforce,Hours,SUM,LMS,South Region,Quarterly,TRUE,10/16/2025 3:50
+M-0022,Overtime Hours,Total overtime hours logged,HR / Workforce,Hours,SUM,HRIS,Midwest DC 2,Daily,TRUE,10/16/2025 3:50
+M-0023,Absenteeism Rate,Percentage of unplanned absences,HR / Workforce,%,AVG,HRIS,West Store #1008,Monthly,TRUE,10/16/2025 3:50
+M-0024,Campaign ROI,Return on investment for marketing campaigns,Marketing,%,AVG,Marketing Platform,West Store #1008,Quarterly,TRUE,10/16/2025 3:50
+M-0025,Ad Spend,Total advertising spend,Marketing,USD,SUM,Marketing Platform,West Store #1006,Monthly,TRUE,10/16/2025 3:50
+M-0026,Conversion Rate,Percentage of users converting from ads,Marketing,%,AVG,Web Analytics,West Store #1004,Monthly,TRUE,10/16/2025 3:50
+M-0027,Email Open Rate,Percentage of marketing emails opened,Marketing,%,AVG,Email Platform,East Store #1032,Weekly,TRUE,10/16/2025 3:50
+M-0028,Leads Generated,Total number of marketing leads generated,Marketing,Count,SUM,CRM,Midwest Store #1011,Weekly,TRUE,10/16/2025 3:50
+M-0029,System Uptime,Percentage of time systems are operational,IT / Digital,%,AVG,Monitoring,South Store #1036,Weekly,TRUE,10/16/2025 3:50
+M-0030,Page Load Time,Average time for website pages to load,IT / Digital,Seconds,AVG,Web Analytics,Midwest Store #1011,Quarterly,TRUE,10/16/2025 3:50
+M-0031,App Downloads,Total downloads of the mobile app,IT / Digital,Count,SUM,App Store Analytics,East Store #1032,Quarterly,TRUE,10/16/2025 3:50
+M-0032,Critical Incidents,Number of P1/P2 IT incidents,IT / Digital,Count,SUM,ITSM,East Region,Weekly,TRUE,10/16/2025 3:50
+M-0033,API Latency,Average API response time,IT / Digital,Milliseconds,AVG,Monitoring,Midwest Region,Monthly,TRUE,10/16/2025 3:50

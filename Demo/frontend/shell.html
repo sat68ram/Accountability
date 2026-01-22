@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enterprise Accountability</title>
+
+  <!-- Keep EVERYTHING from your original <style> exactly the same -->
+  <!-- Not pasted here for brevity — you keep your full CSS block -->
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ------------------------------- -->
+    <!--        COMMON HEADER           -->
+    <!-- ------------------------------- -->
+    <header>
+      <h1>Enterprise Accountability</h1>
+      <div class="right" id="screen-subtitle">Loading…</div>
+    </header>
+
+
+    <!-- ------------------------------- -->
+    <!--  MAIN AREA WHERE SCREENS LOAD   -->
+    <!-- ------------------------------- -->
+    <main id="screen-container">
+      <!-- Each screen’s <main> content will be injected here -->
+    </main>
+
+
+    <!-- ------------------------------- -->
+    <!--        COMMON FOOTER            -->
+    <!-- ------------------------------- -->
+    <footer>
+      Enterprise Accountability · Automation.ai
+    </footer>
+
+  </div>
+
+  <!-- Screen Loader Script -->
+  <script>
+    async function loadScreen(screenPath, subtitleText) {
+      document.getElementById("screen-subtitle").textContent = subtitleText;
+
+      const html = await fetch(screenPath).then(r => r.text());
+      document.getElementById("screen-container").innerHTML = html;
+    }
+
+    // Example default screen
+    loadScreen("screen-company-vision.html", "Company Vision • Portfolio Overview");
+  </script>
+
+</body>
+</html>

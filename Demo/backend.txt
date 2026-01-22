@@ -1,0 +1,53 @@
+This is a Node.js backend application built with Express that handles authentication for a user system stored in Snowflake. Here is a walkthrough of the code flow from the top:
+
+1. Entry Point: 
+src/server.js
+This is where the application starts.
+
+Server Setup: It initializes an Express app running on port 4000 (by default).
+Middleware:
+cors: Configured to allow requests from the frontend (likely running on http://localhost:5173).
+express.json(): Parses incoming JSON payloads.
+Routes:
+Mounts authentication routes at /api/auth (handled by 
+routes/auth.js
+).
+Serves static files for a "shell" feature from ../../frontend/src/shell via the /shell endpoint.
+Includes a simple health check route at / returning { status: 'ok' }.
+
+2. Database Connection: 
+src/db.js
+This file manages the connection to your Snowflake data warehouse.
+
+Configuration: Loads credentials (SNOWFLAKE_ACCOUNT, SNOWFLAKE_USER, etc.) from the 
+.env
+ file.
+Connection Pool: Creates a connection pool (snowflake.createPool) rather than a single connection, which is best practice for handling multiple concurrent requests.
+Query Helper: Exports a query function that simplifies executing SQL. It handles checking out a connection from the pool, executing the query with bind parameters (for security), and returning the rows.
+
+3. Authentication Logic: 
+src/routes/auth.js
+This file contains the core logic for user management.
+
+Register (POST /register):
+Checks if the email already exists in AUTH_DB.AUTH_SCHEMA.USERS.
+Hashes the password using bcrypt.
+Inserts the new user into the database.
+Generates a signed JWT (JSON Web Token) and returns it with the user data.
+
+Login (POST /login):
+Looks up the user by email in Snowflake.
+Verifies the password using bcrypt.compare.
+Asynchronously updates the LAST_LOGIN_AT timestamp in the database (without blocking the response).
+Returns a JWT and user profile if successful.
+
+Key Dependencies
+snowflake-sdk: Driver for connecting to Snowflake.
+bcryptjs: For securely hashing and verifying passwords.
+jsonwebtoken: For creating session tokens for the frontend.
+dotenv: For loading secret environment variables.
+This structure is a classic "Controller-Service" pattern where 
+server.js
+ acts as the gateway, routes/ acts as the controller logic, and 
+db.js
+ acts as the data access layer.

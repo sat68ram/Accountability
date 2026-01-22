@@ -1,0 +1,56 @@
+ORG_UNIT_ID,ORG_UNIT_NAME,ORG_LEVEL,PARENT_ORG_UNIT_ID,HEAD_OF_UNIT,REGION,CREATED_AT
+OU-0001,Corporate HQ,CORPORATE,,Lisa Thompson,ALL,10/16/2025 3:44
+OU-0101,West Region,REGION,OU-0001,Michael Chen,West,10/16/2025 3:44
+OU-0102,Midwest Region,REGION,OU-0001,Sarah Patel,Midwest,10/16/2025 3:44
+OU-0103,East Region,REGION,OU-0001,John Roberts,East,10/16/2025 3:44
+OU-0104,South Region,REGION,OU-0001,Emily Sanchez,South,10/16/2025 3:44
+OU-0201DC,West DC 1,DC,OU-0101,Anna Brown,West,10/16/2025 3:44
+OU-0202DC,West DC 2,DC,OU-0101,William Scott,West,10/16/2025 3:44
+OU-0301DC,Midwest DC 1,DC,OU-0102,Anna Brown,Midwest,10/16/2025 3:44
+OU-0302DC,Midwest DC 2,DC,OU-0102,James Miller,Midwest,10/16/2025 3:44
+OU-0401DC,East DC 1,DC,OU-0103,Laura Evans,East,10/16/2025 3:44
+OU-0402DC,East DC 2,DC,OU-0103,Anna Brown,East,10/16/2025 3:44
+OU-0501DC,South DC 1,DC,OU-0104,Anna Brown,South,10/16/2025 3:44
+OU-0502DC,South DC 2,DC,OU-0104,Anna Brown,South,10/16/2025 3:44
+OU-1001,West Store #1001,STORE,OU-0101,David Wilson,West,10/16/2025 3:44
+OU-1002,West Store #1002,STORE,OU-0101,Olivia Adams,West,10/16/2025 3:44
+OU-1003,West Store #1003,STORE,OU-0101,Robert Garcia,West,10/16/2025 3:44
+OU-1004,West Store #1004,STORE,OU-0101,Samantha Clark,West,10/16/2025 3:44
+OU-1005,West Store #1005,STORE,OU-0101,Robert Garcia,West,10/16/2025 3:44
+OU-1006,West Store #1006,STORE,OU-0101,Jennifer Lee,West,10/16/2025 3:44
+OU-1007,West Store #1007,STORE,OU-0101,Daniel Lewis,West,10/16/2025 3:44
+OU-1008,West Store #1008,STORE,OU-0101,Samantha Clark,West,10/16/2025 3:44
+OU-1009,West Store #1009,STORE,OU-0101,David Wilson,West,10/16/2025 3:44
+OU-1010,West Store #1010,STORE,OU-0101,Daniel Lewis,West,10/16/2025 3:44
+OU-1011,Midwest Store #1011,STORE,OU-0102,Daniel Lewis,Midwest,10/16/2025 3:44
+OU-1012,Midwest Store #1012,STORE,OU-0102,Olivia Adams,Midwest,10/16/2025 3:44
+OU-1013,Midwest Store #1013,STORE,OU-0102,David Wilson,Midwest,10/16/2025 3:44
+OU-1014,Midwest Store #1014,STORE,OU-0102,Samantha Clark,Midwest,10/16/2025 3:44
+OU-1015,Midwest Store #1015,STORE,OU-0102,Jennifer Lee,Midwest,10/16/2025 3:44
+OU-1016,Midwest Store #1016,STORE,OU-0102,Jennifer Lee,Midwest,10/16/2025 3:44
+OU-1017,Midwest Store #1017,STORE,OU-0102,Samantha Clark,Midwest,10/16/2025 3:44
+OU-1018,Midwest Store #1018,STORE,OU-0102,Daniel Lewis,Midwest,10/16/2025 3:44
+OU-1019,Midwest Store #1019,STORE,OU-0102,Daniel Lewis,Midwest,10/16/2025 3:44
+OU-1020,Midwest Store #1020,STORE,OU-0102,Samantha Clark,Midwest,10/16/2025 3:44
+OU-1021,East Store #1021,STORE,OU-0103,Samantha Clark,East,10/16/2025 3:44
+OU-1022,East Store #1022,STORE,OU-0103,Samantha Clark,East,10/16/2025 3:44
+OU-1023,East Store #1023,STORE,OU-0103,David Wilson,East,10/16/2025 3:44
+OU-1024,East Store #1024,STORE,OU-0103,Daniel Lewis,East,10/16/2025 3:44
+OU-1025,East Store #1025,STORE,OU-0103,David Wilson,East,10/16/2025 3:44
+OU-1026,East Store #1026,STORE,OU-0103,Samantha Clark,East,10/16/2025 3:44
+OU-1027,East Store #1027,STORE,OU-0103,Jennifer Lee,East,10/16/2025 3:44
+OU-1028,East Store #1028,STORE,OU-0103,Olivia Adams,East,10/16/2025 3:44
+OU-1029,East Store #1029,STORE,OU-0103,Daniel Lewis,East,10/16/2025 3:44
+OU-1030,East Store #1030,STORE,OU-0103,David Wilson,East,10/16/2025 3:44
+OU-1031,East Store #1031,STORE,OU-0103,Robert Garcia,East,10/16/2025 3:44
+OU-1032,East Store #1032,STORE,OU-0103,Jennifer Lee,East,10/16/2025 3:44
+OU-1033,South Store #1033,STORE,OU-0104,Jennifer Lee,South,10/16/2025 3:44
+OU-1034,South Store #1034,STORE,OU-0104,Daniel Lewis,South,10/16/2025 3:44
+OU-1035,South Store #1035,STORE,OU-0104,Jennifer Lee,South,10/16/2025 3:44
+OU-1036,South Store #1036,STORE,OU-0104,Robert Garcia,South,10/16/2025 3:44
+OU-1037,South Store #1037,STORE,OU-0104,Samantha Clark,South,10/16/2025 3:44
+OU-1038,South Store #1038,STORE,OU-0104,David Wilson,South,10/16/2025 3:44
+OU-1039,South Store #1039,STORE,OU-0104,Robert Garcia,South,10/16/2025 3:44
+OU-1040,South Store #1040,STORE,OU-0104,Daniel Lewis,South,10/16/2025 3:44
+OU-1041,South Store #1041,STORE,OU-0104,Olivia Adams,South,10/16/2025 3:44
+OU-1042,South Store #1042,STORE,OU-0104,David Wilson,South,10/16/2025 3:44

@@ -1,0 +1,21 @@
+CUSTOMER_ID,CUSTOMER_NAME,REGION_ID
+CUST_TSMC,TSMC,TW
+CUST_SAMSUNG,Samsung Electronics,KR
+CUST_INTEL,Intel Corporation,NA
+CUST_MICRON,Micron Technology,NA
+CUST_SKHYNIX,SK hynix,KR
+CUST_GFS,GlobalFoundries,NA
+CUST_UMC,UMC (United Microelectronics Corp.),TW
+CUST_SMIC,SMIC (Semiconductor Manufacturing International Corp.),CN
+CUST_NVIDIA,NVIDIA Corporation,NA
+CUST_AMD,AMD (Advanced Micro Devices),NA
+CUST_TI,Texas Instruments,NA
+CUST_QUALCOMM,Qualcomm,NA
+CUST_BROADCOM,Broadcom,NA
+CUST_MEDIATEK,MediaTek,TW
+CUST_SONY,Sony Semiconductor Solutions,JP
+CUST_RENESAS,Renesas Electronics,JP
+CUST_NXP,NXP Semiconductors,EU
+CUST_INFINEON,Infineon Technologies,EU
+CUST_ST,STMicroelectronics,EU
+CUST_ASE,ASE Group,TW

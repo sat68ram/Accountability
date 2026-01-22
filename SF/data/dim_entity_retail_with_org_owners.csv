@@ -1,0 +1,25 @@
+ENTITY_ID,ENTITY_TYPE,ENTITY_NAME,STATUS,OWNER,CREATED_AT
+EN-0001,Product,Milk,Planned,James Miller,10/16/2025 3:47
+EN-0002,Product,Bread,Planned,James Miller,10/16/2025 3:47
+EN-0003,Product,Eggs,Planned,Emily Sanchez,10/16/2025 3:47
+EN-0004,Product,Apples,Inactive,Olivia Adams,10/16/2025 3:47
+EN-0005,Product,Bananas,Active,Emily Sanchez,10/16/2025 3:47
+EN-0006,Product,Detergent,Inactive,Samantha Clark,10/16/2025 3:47
+EN-0007,Product,Shampoo,Planned,Sarah Patel,10/16/2025 3:47
+EN-0008,Product,Toothpaste,Active,Jennifer Lee,10/16/2025 3:47
+EN-0009,Product,Laptop,Active,Daniel Lewis,10/16/2025 3:47
+EN-0010,Product,Headphones,Planned,Robert Garcia,10/16/2025 3:47
+EN-0011,Customer Segment,Regular Customers,Active,Jennifer Lee,10/16/2025 3:47
+EN-0012,Customer Segment,Loyalty Members,Active,Olivia Adams,10/16/2025 3:47
+EN-0013,Customer Segment,Online Shoppers,Planned,James Miller,10/16/2025 3:47
+EN-0014,Customer Segment,In-Store Shoppers,Inactive,John Roberts,10/16/2025 3:47
+EN-0015,Customer Segment,Wholesale,Inactive,Samantha Clark,10/16/2025 3:47
+EN-0016,Project,Back-to-School Campaign,Planned,Lisa Thompson,10/16/2025 3:47
+EN-0017,Project,Holiday Sales Push,Active,Michael Chen,10/16/2025 3:47
+EN-0018,Project,Digital Transformation,Active,William Scott,10/16/2025 3:47
+EN-0019,Project,Loyalty Program Expansion,Active,William Scott,10/16/2025 3:47
+EN-0020,Project,Store Modernization,Planned,Michael Chen,10/16/2025 3:47
+EN-0021,Region,West,Inactive,Emily Sanchez,10/16/2025 3:47
+EN-0022,Region,Midwest,Planned,Olivia Adams,10/16/2025 3:47
+EN-0023,Region,East,Inactive,David Wilson,10/16/2025 3:47
+EN-0024,Region,South,Planned,Robert Garcia,10/16/2025 3:47

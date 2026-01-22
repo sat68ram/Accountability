@@ -1,0 +1,15 @@
+PRODUCT_LINE_ID,PRODUCT_LINE_NAME
+PL_CVD,Chemical Vapor Deposition (CVD) Systems
+PL_PVD,Physical Vapor Deposition (PVD) Systems
+PL_RTP,Rapid Thermal Processing (RTP) Systems
+PL_ETCH,Etch Systems
+PL_CMP,Chemical Mechanical Planarization (CMP) Tools
+PL_ION_IMPLANT,Ion Implant Systems
+PL_METROLOGY,Metrology & Inspection Tools
+PL_EPI,Epitaxy Systems
+PL_E_BEAM,E-Beam Inspection
+PL_WET_CLEAN,Wafer Wet Cleaning Systems
+PL_PACKAGING,Advanced Packaging Equipment
+PL_PV_SOLAR,PV Solar Manufacturing Equipment
+PL_DISPLAY,Display Manufacturing Equipment
+PL_CONTROL_SW,Factory Control Software / Automation

@@ -1,0 +1,293 @@
+<div class="vision-layout">
+
+  <!-- A. Executive SCM Overview -->
+  <div class="vision-row">
+    <section class="panel-light">
+      <div class="panel-header">Executive Supply Chain Overview</div>
+      <div class="panel-sub">
+        On-time performance, supplier tiers, freight spend, and revenue at risk.
+      </div>
+
+      <!-- KPIs -->
+      <div class="scm-kpi-grid">
+        <div class="metric-card metric-good">
+          <div class="metric-label">Global OTD %</div>
+          <div class="metric-value">93.4%</div>
+          <div class="metric-hint">weighted by spend</div>
+        </div>
+        <div class="metric-card metric-warn">
+          <div class="metric-label">Avg Delay (days)</div>
+          <div class="metric-value">2.9</div>
+          <div class="metric-hint">across all POs</div>
+        </div>
+        <div class="metric-card metric-risk">
+          <div class="metric-label">Revenue at Risk</div>
+          <div class="metric-value">$138M</div>
+          <div class="metric-hint">open delayed POs tied to builds</div>
+        </div>
+      </div>
+
+      <div class="scm-two-col" style="margin-top:14px;">
+        <!-- OTD by supplier / region / category + delay trend -->
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:#4b5563;">
+            On-Time Delivery % (by supplier & region)
+          </div>
+          <table class="scm-table">
+            <thead>
+              <tr>
+                <th>Supplier</th>
+                <th>Region</th>
+                <th>OTD %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Foxconn</td>
+                <td>APAC</td>
+                <td>95.2%</td>
+              </tr>
+              <tr>
+                <td>Advantest</td>
+                <td>Japan</td>
+                <td>88.5%</td>
+              </tr>
+              <tr>
+                <td>XYZ Precision</td>
+                <td>EU</td>
+                <td>82.3%</td>
+              </tr>
+              <tr>
+                <td>Global Freight Corp</td>
+                <td>NA / EU</td>
+                <td>91.8%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="chart-delay-trend">
+            <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+              <g class="delay-grid">
+                <line x1="0" y1="10" x2="100" y2="10" />
+                <line x1="0" y1="20" x2="100" y2="20" />
+                <line x1="0" y1="30" x2="100" y2="30" />
+                <line x1="0" y1="40" x2="100" y2="40" />
+              </g>
+              <line class="delay-axis" x1="5" y1="45" x2="95" y2="45" />
+              <line class="delay-axis" x1="5" y1="5" x2="5" y2="45" />
+              <!-- Avg delay days trend: 4.1 ? 2.9 over 6 months -->
+              <polyline class="delay-line"
+                points="5,20 25,23 45,28 65,32 85,35" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Supplier quartiles, freight spend, revenue at risk -->
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:#4b5563;">
+            Supplier Performance Quartiles
+          </div>
+          <div class="scm-quartiles">
+            <div class="scm-quartile-card">
+              <div class="scm-quartile-title">Q1 (Top 25%)</div>
+              <div class="scm-quartile-metric">OTD = 97%</div>
+              <div class="scm-quartile-metric">Defect = 0.3%</div>
+            </div>
+            <div class="scm-quartile-card">
+              <div class="scm-quartile-title">Q2</div>
+              <div class="scm-quartile-metric">OTD 93–97%</div>
+              <div class="scm-quartile-metric">Defect = 0.5%</div>
+            </div>
+            <div class="scm-quartile-card">
+              <div class="scm-quartile-title">Q3</div>
+              <div class="scm-quartile-metric">OTD 88–93%</div>
+              <div class="scm-quartile-metric">Defect = 0.9%</div>
+            </div>
+            <div class="scm-quartile-card">
+              <div class="scm-quartile-title">Q4 (Bottom 25%)</div>
+              <div class="scm-quartile-metric">OTD &lt; 88%</div>
+              <div class="scm-quartile-metric">Action plan required</div>
+            </div>
+          </div>
+
+          <div class="chart-freight">
+            <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+              <!-- simple vertical bars: freight spend by region -->
+              <g class="freight-bars">
+                <rect x="10" y="20" width="10" height="25" />   <!-- NA -->
+                <rect x="32" y="18" width="10" height="27" />   <!-- EU -->
+                <rect x="54" y="14" width="10" height="31" />   <!-- APAC -->
+                <rect x="76" y="24" width="10" height="21" />   <!-- Other -->
+              </g>
+            </svg>
+          </div>
+          <div style="margin-top:4px;font-size:0.75rem;color:#6b7280;">
+            Freight spend (last Q): APAC 38%, EU 26%, NA 24%, Other 12%.
+          </div>
+
+          <div class="scm-revrisk">
+            <div style="font-weight:600;">Revenue at Risk (Delayed POs)</div>
+            <div style="margin-top:4px;">
+              <strong>$138M</strong> tied to POs &gt; 10 days late across
+              7 critical suppliers; 3 nm / 5 nm ramps most impacted.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- B. Supplier Scorecard -->
+  <div class="vision-row">
+    <section class="panel-light">
+      <div class="panel-header">Supplier Scorecard</div>
+      <div class="panel-sub">
+        Core KPIs by strategic and single-source suppliers.
+      </div>
+
+      <table class="scm-score-table">
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>OTD %</th>
+            <th>Avg Delay (days)</th>
+            <th>Defect %</th>
+            <th>Risk Tier</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Foxconn</td>
+            <td>95.2</td>
+            <td>1.8</td>
+            <td>0.6</td>
+            <td>Tier 1</td>
+            <td><span class="scm-score-good">91</span></td>
+          </tr>
+          <tr>
+            <td>Advantest</td>
+            <td>88.5</td>
+            <td>4.2</td>
+            <td>0.8</td>
+            <td>Tier 2</td>
+            <td><span class="scm-score-mid">79</span></td>
+          </tr>
+          <tr>
+            <td>XYZ Precision</td>
+            <td>82.3</td>
+            <td>6.1</td>
+            <td>1.3</td>
+            <td>Single</td>
+            <td><span class="scm-score-risk">65</span></td>
+          </tr>
+          <tr>
+            <td>Global Freight Corp</td>
+            <td>91.8</td>
+            <td>3.0</td>
+            <td>0.9</td>
+            <td>Tier 2</td>
+            <td><span class="scm-score-mid">82</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- C. Inventory & Logistics -->
+  <div class="vision-row scm-two-col">
+    <!-- Days of supply & stockouts -->
+    <section class="panel-light">
+      <div class="panel-header">Inventory & Logistics</div>
+      <div class="panel-sub">
+        Days of supply, stockout risk, and in-transit shipments.
+      </div>
+
+      <!-- Days of Supply trend by site -->
+      <div style="font-size:0.85rem;font-weight:600;color:#4b5563;margin-top:8px;">
+        Days of Supply Trend (Top Sites)
+      </div>
+      <div class="chart-dos">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <!-- grid -->
+          <g class="dos-grid">
+            <line x1="0" y1="10" x2="100" y2="10" />
+            <line x1="0" y1="20" x2="100" y2="20" />
+            <line x1="0" y1="30" x2="100" y2="30" />
+            <line x1="0" y1="40" x2="100" y2="40" />
+          </g>
+          <!-- axes -->
+          <line class="dos-axis" x1="5" y1="45" x2="95" y2="45" />
+          <line class="dos-axis" x1="5" y1="5" x2="5" y2="45" />
+          <!-- DoS trend (e.g., 42 ? 35 days) -->
+          <polyline class="dos-line"
+            points="5,18 25,20 45,24 65,30 85,34" />
+        </svg>
+      </div>
+
+      <!-- Stockout alerts -->
+      <div style="font-size:0.85rem;font-weight:600;color:#4b5563;margin-top:8px;">
+        Stockout Alerts (Next 30 Days)
+      </div>
+      <div class="scm-alert-list">
+        <div class="scm-alert-row">
+          <span>Critical valve assembly – 3 nm ramp</span>
+          <span>Site: TW-Fab1</span>
+          <span class="scm-alert-chip">7 days</span>
+        </div>
+        <div class="scm-alert-row">
+          <span>Etch chamber liners – 5 nm pilot</span>
+          <span>Site: KR-Fab2</span>
+          <span class="scm-alert-chip">9 days</span>
+        </div>
+        <div class="scm-alert-row">
+          <span>Tool crates – Display Gen 8</span>
+          <span>Site: CN-Display1</span>
+          <span class="scm-alert-chip">12 days</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- In-transit, expedite cost -->
+    <section class="panel-light">
+      <div class="panel-header">In-Transit & Expedites</div>
+      <div class="panel-sub">
+        In-transit shipments by region and cost of expedites.
+      </div>
+
+      <!-- In-transit by region -->
+      <div style="font-size:0.85rem;font-weight:600;color:#4b5563;margin-top:8px;">
+        In-Transit Shipments by Region
+      </div>
+      <div class="chart-intransit">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <g class="intransit-bars">
+            <rect x="10" y="22" width="10" height="23" />   <!-- NA -->
+            <rect x="32" y="18" width="10" height="27" />   <!-- EU -->
+            <rect x="54" y="14" width="10" height="31" />   <!-- APAC -->
+            <rect x="76" y="28" width="10" height="17" />   <!-- Other -->
+          </g>
+        </svg>
+      </div>
+      <div style="margin-top:4px;font-size:0.75rem;color:#6b7280;">
+        APAC: 126 shipments · EU: 94 · NA: 81 · Other: 44
+      </div>
+
+      <!-- Cost of expedite shipments -->
+      <div style="font-size:0.85rem;font-weight:600;color:#4b5563;margin-top:10px;">
+        Cost of Expedite Shipments (Last 6 Months)
+      </div>
+      <div class="chart-expedite">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+          <!-- simple line: expedite cost trending up then stabilizing -->
+          <polyline class="expedite-line"
+            points="5,35 20,32 35,28 50,24 65,22 80,23 95,24" />
+        </svg>
+      </div>
+      <div style="margin-top:4px;font-size:0.75rem;color:#6b7280;">
+        Expedite spend YTD: <strong>$18.4M</strong>, ~14% of total freight.
+      </div>
+    </section>
+  </div>
+
+</div>

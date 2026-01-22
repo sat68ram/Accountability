@@ -1,0 +1,46 @@
+PRODUCT_ID,PRODUCT_NAME,PRODUCT_LINE_ID
+PR_CVD_001,Altus CVD Platform,PL_CVD
+PR_CVD_002,NovaFill Gapfill CVD,PL_CVD
+PR_CVD_003,Vector PECVD System,PL_CVD
+PR_CVD_004,Harmony ALD CVD Tool,PL_CVD
+PR_PVD_001,Endura PVD Platform,PL_PVD
+PR_PVD_002,Magnum Copper PVD,PL_PVD
+PR_PVD_003,Orion Barrier/Seed PVD,PL_PVD
+PR_PVD_004,Helios High-Rate PVD,PL_PVD
+PR_RTP_001,Radiance RTP System,PL_RTP
+PR_RTP_002,Tempest Rapid Thermal Anneal,PL_RTP
+PR_RTP_003,Fusion Spike Anneal RTP,PL_RTP
+PR_ETCH_001,Centura Dielectric Etch,PL_ETCH
+PR_ETCH_002,Helix Metal Etch,PL_ETCH
+PR_ETCH_003,Nova Via Etch,PL_ETCH
+PR_ETCH_004,Pioneer High Aspect Ratio Etch,PL_ETCH
+PR_CMP_001,Mirra Copper CMP,PL_CMP
+PR_CMP_002,Reflexion Tungsten CMP,PL_CMP
+PR_CMP_003,Polaris Dielectric CMP,PL_CMP
+PR_IMPL_001,Imperia High Current Implanter,PL_ION_IMPLANT
+PR_IMPL_002,Vector High Energy Implanter,PL_ION_IMPLANT
+PR_IMPL_003,Zenith Medium Current Implanter,PL_ION_IMPLANT
+PR_MET_001,Insight CD-SEM,PL_METROLOGY
+PR_MET_002,Axiom Overlay Metrology,PL_METROLOGY
+PR_MET_003,Spectra Film Thickness Metrology,PL_METROLOGY
+PR_MET_004,Vantage Defect Inspection,PL_METROLOGY
+PR_EPI_001,EpiPrime Silicon Epitaxy,PL_EPI
+PR_EPI_002,Strata SiGe Epi Reactor,PL_EPI
+PR_EPI_003,Quantum III Advanced Epi,PL_EPI
+PR_EB_001,Orion E-Beam Defect Inspection,PL_E_BEAM
+PR_EB_002,NovaScan Multi-Beam Inspector,PL_E_BEAM
+PR_WC_001,AquaClean Batch Wet Bench,PL_WET_CLEAN
+PR_WC_002,Torrent Single-Wafer Cleaner,PL_WET_CLEAN
+PR_WC_003,CrystalStrip Resist Strip System,PL_WET_CLEAN
+PR_PACK_001,ViaConnect TSV Reveal Tool,PL_PACKAGING
+PR_PACK_002,FusionFan-Out Panel Tool,PL_PACKAGING
+PR_PACK_003,MicroBump Plating System,PL_PACKAGING
+PR_PV_001,SunLine PECVD for PV,PL_PV_SOLAR
+PR_PV_002,HelioTex Texturing Tool,PL_PV_SOLAR
+PR_PV_003,SolGuard ARC Coating System,PL_PV_SOLAR
+PR_DISP_001,LumiGlass TFT Deposition,PL_DISPLAY
+PR_DISP_002,NovaOLED Thin Film Stack,PL_DISPLAY
+PR_DISP_003,PixelAlign Litho Coater,PL_DISPLAY
+PR_SW_001,FabMaster MES Suite,PL_CONTROL_SW
+PR_SW_002,ToolLink Equipment Integration,PL_CONTROL_SW
+PR_SW_003,YieldSense Analytics Platform,PL_CONTROL_SW

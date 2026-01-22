@@ -1,0 +1,17 @@
+-- Example for one file; repeat for each CSV
+snowsql -c em -q "PUT file://dim_date_2024_2025.csv @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_region.csv         @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_currency.csv       @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_customer.csv       @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_product_line.csv   @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_product.csv        @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_tech_node.csv      @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://fact_revenue_2024_2025.csv @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+
+snowsql -c em -q "PUT file://fact_portfolio_metric_full.csv @EM_DB.REVENUE.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://fact_timeline_health.csv @EM_DB.METRICS.CSV_STAGE AUTO_COMPRESS=FALSE"
+snowsql -c em -q "PUT file://dim_okr.csv @EM_DB.METRICS.CSV_STAGE AUTO_COMPRESS=FALSE"
+
+snowsql -c em -q "PUT file://fact_portfolio_metric_clean.csv @EM_DB.METRICS.CSV_STAGE AUTO_COMPRESS=FALSE"
+
+-- connections.em
