@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRouter from './routes/auth.js';
 import visionRouter from './routes/vision.js';
 import revenueRouter from './routes/revenue.js';
+import profitabilityRouter from './routes/profitability.js';
 
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use("/api/vision", visionRouter);
 app.use("/api/revenue", revenueRouter);
+app.use("/api/profitability", profitabilityRouter);
 
 
 app.get('/', (_req, res) => {
