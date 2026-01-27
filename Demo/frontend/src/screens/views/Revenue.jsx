@@ -1,5 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRevenueSummary } from "../../hooks/useRevenue";
+import { getCurrentYearAndQuarter } from "../../hooks/useVisionSummary";
+
 export default function Revenue() {
+  // --- period state ---
+  const [periodType, setPeriodType] = useState("QUARTER");
+
+  const { year, quarter } = getCurrentYearAndQuarter();
+  const [periodLabel, setPeriodLabel] = useState(quarter); // default
+  
+  const yearLabel = year;
+  
+  const quarterQuery = useRevenueSummary(periodType, periodLabel);
+  const yearQuery = useRevenueSummary('YEAR', yearLabel);
+
+  const isLoading = quarterQuery.isLoading || yearQuery.isLoading;
+  const error = quarterQuery.error || yearQuery.error;
+
+  if (isLoading) {
+    return <div className="screen company-vision">Loading…</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="screen company-vision">
+        <div className="panel-light">Failed to load Revenue data</div>
+      </div>
+    );
+  }
+
+  // Use these in UI:
+  const quarterData = quarterQuery.data ?? {};
+  const yearData = yearQuery.data ?? {};
+
+  const metrics = quarterData.metrics ?? [];
+  const yearMetrics = yearData.metrics ?? [];
+
+  const metricByName = (name) =>
+    metrics.find((m) => m.METRIC_NAME === name) || {};
+
+  const yearMetricByName = (name) =>
+    yearMetrics.find((m) => m.METRIC_NAME === name) || {};
+
+  // YTD Revenue should come from year data, not quarter
+  const ytdMetric = yearMetricByName("YTD Revenue");
+  const yoyMetric = metricByName("YoY Growth");
+  const qoqMetric = metricByName("QoQ Growth");
+
+  const formatCurrency = (value) => {
+    if (value === null || value === undefined || value === "--") return "--";
+    const num = typeof value === 'string' ? parseFloat(value) : value;
+    if (isNaN(num)) return "--";
+    if (num >= 1000000000) return `$${(num / 1000000000).toFixed(1)}B`;
+    if (num >= 1000000) return `$${(num / 1000000).toFixed(1)}M`;
+    if (num >= 1000) return `$${(num / 1000).toFixed(0)}K`;
+    return `$${num.toFixed(0)}`;
+  };
+
+  const formatPercent = (value) => {
+    if (value === null || value === undefined || value === "--") return "--";
+    const num = typeof value === 'string' ? parseFloat(value) : value;
+    if (isNaN(num)) return "--";
+    return `${num >= 0 ? '+' : ''}${num.toFixed(1)}%`;
+  };
+
+  const formatNumber = (value) => {
+    if (value === null || value === undefined || value === "--") return "--";
+    const num = typeof value === 'string' ? parseFloat(value) : value;
+    if (isNaN(num)) return "--";
+    return num.toLocaleString();
+  };
+
+  const businessSegments = quarterData.businessSegments ?? [];
+  const productLines = quarterData.productLines ?? [];
+  const productSKUs = quarterData.productSKUs ?? [];
+  const revenueByRegion = quarterData.revenueByRegion ?? [];
+  const revenueByCustomer = quarterData.revenueByCustomer ?? [];
+
   return (
     <div className="vision-layout">
 
@@ -19,21 +96,21 @@ export default function Revenue() {
               marginTop: "12px",
             }}
           >
-            <div className="metric-card metric-good">
+            <div className={`metric-card metric-${(ytdMetric.HEALTH_STATUS?.toLowerCase()) ?? "good"}`}>
               <div className="metric-label">YTD Revenue</div>
-              <div className="metric-value">$4.2B</div>
+              <div className="metric-value">{ytdMetric.VALUE_NUM ?? "--"}{ytdMetric.VALUE_UNIT ?? ""}</div>
               <div className="metric-hint">Fiscal year to date</div>
             </div>
 
-            <div className="metric-card metric-warn">
+            <div className={`metric-card metric-${(yoyMetric.HEALTH_STATUS?.toLowerCase()) ?? "warn"}`}>
               <div className="metric-label">YoY Growth</div>
-              <div className="metric-value">+11.4%</div>
+              <div className="metric-value">{yoyMetric.VALUE_NUM ?? "--"}{yoyMetric.VALUE_UNIT ?? ""}</div>
               <div className="metric-hint">vs same period last year</div>
             </div>
 
-            <div className="metric-card metric-risk">
+            <div className={`metric-card metric-${(qoqMetric.HEALTH_STATUS?.toLowerCase()) ?? "risk"}`}>
               <div className="metric-label">QoQ Growth</div>
-              <div className="metric-value">+2.1%</div>
+              <div className="metric-value">{qoqMetric.VALUE_NUM ?? "--"}{qoqMetric.VALUE_UNIT ?? ""}</div>
               <div className="metric-hint">vs prior quarter</div>
             </div>
           </div>
@@ -58,21 +135,19 @@ export default function Revenue() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Semiconductor Systems</td>
-                  <td>$2.6B</td>
-                  <td>27.5%</td>
-                </tr>
-                <tr>
-                  <td>Applied Global Services</td>
-                  <td>$1.1B</td>
-                  <td>23.2%</td>
-                </tr>
-                <tr>
-                  <td>Display & Adjacent Technologies</td>
-                  <td>$0.5B</td>
-                  <td>18.7%</td>
-                </tr>
+                {businessSegments.length > 0 ? (
+                  businessSegments.map((segment, idx) => (
+                    <tr key={idx}>
+                      <td>{segment.BUSINESS_SEGMENT ?? "--"}</td>
+                      <td>{formatCurrency(segment.REVENUE)}</td>
+                      <td>{segment.OPERATING_MARGIN ? `${segment.OPERATING_MARGIN.toFixed(1)}%` : "--"}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" style={{ textAlign: "center", color: "#666" }}>No data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -98,36 +173,20 @@ export default function Revenue() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>FAB Products</td>
-                  <td>$1.8B</td>
-                  <td>$4.2M</td>
-                  <td>430</td>
-                </tr>
-                <tr>
-                  <td>Display</td>
-                  <td>$0.7B</td>
-                  <td>$2.9M</td>
-                  <td>240</td>
-                </tr>
-                <tr>
-                  <td>Packaging Tools</td>
-                  <td>$0.4B</td>
-                  <td>$1.3M</td>
-                  <td>310</td>
-                </tr>
-                <tr>
-                  <td>Inspection & Metrology</td>
-                  <td>$0.9B</td>
-                  <td>$3.1M</td>
-                  <td>290</td>
-                </tr>
-                <tr>
-                  <td>Services & Subscriptions</td>
-                  <td>$0.5B</td>
-                  <td>$180K</td>
-                  <td>2,750</td>
-                </tr>
+                {productLines.length > 0 ? (
+                  productLines.map((product, idx) => (
+                    <tr key={idx}>
+                      <td>{product.PRODUCT_LINE ?? "--"}</td>
+                      <td>{formatCurrency(product.REVENUE)}</td>
+                      <td>{formatCurrency(product.AVG_SELLING_PRICE)}</td>
+                      <td>{formatNumber(product.SHIPMENT_COUNT)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" style={{ textAlign: "center", color: "#666" }}>No data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -152,31 +211,19 @@ export default function Revenue() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>FAB-ETCH-7N-ULTRA</td>
-                  <td>$5.1M</td>
-                  <td>4.5%</td>
-                </tr>
-                <tr>
-                  <td>FAB-DEPOSITION-3D-NAND</td>
-                  <td>$4.7M</td>
-                  <td>3.0%</td>
-                </tr>
-                <tr>
-                  <td>DISP-LITHO-G8</td>
-                  <td>$2.4M</td>
-                  <td>6.2%</td>
-                </tr>
-                <tr>
-                  <td>PACK-ADVANCED-WLP</td>
-                  <td>$1.6M</td>
-                  <td>2.8%</td>
-                </tr>
-                <tr>
-                  <td>SVC-FULL-FAB-CONTRACT-3Y</td>
-                  <td>$350K</td>
-                  <td>0.0%</td>
-                </tr>
+                {productSKUs.length > 0 ? (
+                  productSKUs.map((sku, idx) => (
+                    <tr key={idx}>
+                      <td>{sku.SKU ?? "--"}</td>
+                      <td>{formatCurrency(sku.SELLING_PRICE)}</td>
+                      <td>{sku.DISCOUNT_APPLIED ? `${sku.DISCOUNT_APPLIED.toFixed(1)}%` : "0.0%"}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" style={{ textAlign: "center", color: "#666" }}>No data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -202,26 +249,18 @@ export default function Revenue() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>North America</td>
-                  <td>$1.4B</td>
-                </tr>
-                <tr>
-                  <td>Europe</td>
-                  <td>$0.8B</td>
-                </tr>
-                <tr>
-                  <td>China</td>
-                  <td>$0.9B</td>
-                </tr>
-                <tr>
-                  <td>Rest of Asia</td>
-                  <td>$0.7B</td>
-                </tr>
-                <tr>
-                  <td>Rest of World</td>
-                  <td>$0.4B</td>
-                </tr>
+                {revenueByRegion.length > 0 ? (
+                  revenueByRegion.map((region, idx) => (
+                    <tr key={idx}>
+                      <td>{region.REGION ?? "--"}</td>
+                      <td>{formatCurrency(region.REVENUE)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2" style={{ textAlign: "center", color: "#666" }}>No data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -243,26 +282,18 @@ export default function Revenue() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Alpha Foundry Corp.</td>
-                  <td>$520M</td>
-                </tr>
-                <tr>
-                  <td>Global Chip Manufacturing</td>
-                  <td>$410M</td>
-                </tr>
-                <tr>
-                  <td>NextGen Displays Inc.</td>
-                  <td>$320M</td>
-                </tr>
-                <tr>
-                  <td>Silicon Packaging Solutions</td>
-                  <td>$260M</td>
-                </tr>
-                <tr>
-                  <td>Universal Fab Services</td>
-                  <td>$190M</td>
-                </tr>
+                {revenueByCustomer.length > 0 ? (
+                  revenueByCustomer.map((customer, idx) => (
+                    <tr key={idx}>
+                      <td>{customer.CUSTOMER ?? "--"}</td>
+                      <td>{formatCurrency(customer.REVENUE)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2" style={{ textAlign: "center", color: "#666" }}>No data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
