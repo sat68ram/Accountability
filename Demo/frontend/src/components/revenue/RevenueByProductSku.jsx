@@ -1,7 +1,11 @@
 import React from "react";
+import { getCurrentYearAndQuarter } from "../../hooks/useVisionSummary";
+import { useProductSKUs } from "../../hooks/useRevenue";
 import { formatCurrency } from "./formatUtils";
 
-export default function RevenueByProductSku({ productSKUs }) {
+export default function RevenueByProductSku() {
+  const { quarter } = getCurrentYearAndQuarter();
+  const { data: productSKUs, isLoading, error } = useProductSKUs("QUARTER", quarter);
   const rows = productSKUs ?? [];
 
   return (
@@ -13,6 +17,9 @@ export default function RevenueByProductSku({ productSKUs }) {
         </div>
 
         <div style={{ marginTop: "10px", maxHeight: "280px", overflow: "auto" }}>
+          {isLoading && <div style={{ padding: "8px", color: "#666" }}>Loading…</div>}
+          {error && <div style={{ padding: "8px", color: "#c00" }}>Failed to load.</div>}
+          {!isLoading && !error && (
           <table className="okrs-table">
             <thead>
               <tr>
@@ -37,6 +44,7 @@ export default function RevenueByProductSku({ productSKUs }) {
               )}
             </tbody>
           </table>
+          )}
         </div>
       </section>
     </div>

@@ -1,7 +1,11 @@
 import React from "react";
+import { getCurrentYearAndQuarter } from "../../hooks/useVisionSummary";
+import { useBusinessSegments } from "../../hooks/useRevenue";
 import { formatCurrency } from "./formatUtils";
 
-export default function RevenueByBusinessSegment({ businessSegments }) {
+export default function RevenueByBusinessSegment() {
+  const { quarter } = getCurrentYearAndQuarter();
+  const { data: businessSegments, isLoading, error } = useBusinessSegments("QUARTER", quarter);
   const rows = businessSegments ?? [];
 
   return (
@@ -13,6 +17,9 @@ export default function RevenueByBusinessSegment({ businessSegments }) {
         </div>
 
         <div style={{ marginTop: "10px", maxHeight: "280px", overflow: "auto" }}>
+          {isLoading && <div style={{ padding: "8px", color: "#666" }}>Loading…</div>}
+          {error && <div style={{ padding: "8px", color: "#c00" }}>Failed to load.</div>}
+          {!isLoading && !error && (
           <table className="okrs-table">
             <thead>
               <tr>
@@ -37,6 +44,7 @@ export default function RevenueByBusinessSegment({ businessSegments }) {
               )}
             </tbody>
           </table>
+          )}
         </div>
       </section>
     </div>
