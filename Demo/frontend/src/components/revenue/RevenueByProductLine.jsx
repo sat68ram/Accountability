@@ -1,7 +1,11 @@
 import React from "react";
+import { getCurrentYearAndQuarter } from "../../hooks/useVisionSummary";
+import { useProductLines } from "../../hooks/useRevenue";
 import { formatCurrency, formatNumber } from "./formatUtils";
 
-export default function RevenueByProductLine({ productLines }) {
+export default function RevenueByProductLine() {
+  const { quarter } = getCurrentYearAndQuarter();
+  const { data: productLines, isLoading, error } = useProductLines("QUARTER", quarter);
   const rows = productLines ?? [];
 
   return (
@@ -13,6 +17,9 @@ export default function RevenueByProductLine({ productLines }) {
         </div>
 
         <div style={{ marginTop: "10px", maxHeight: "280px", overflow: "auto" }}>
+          {isLoading && <div style={{ padding: "8px", color: "#666" }}>Loading…</div>}
+          {error && <div style={{ padding: "8px", color: "#c00" }}>Failed to load.</div>}
+          {!isLoading && !error && (
           <table className="okrs-table">
             <thead>
               <tr>
@@ -39,6 +46,7 @@ export default function RevenueByProductLine({ productLines }) {
               )}
             </tbody>
           </table>
+          )}
         </div>
       </section>
     </div>

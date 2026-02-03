@@ -1,6 +1,43 @@
 import React from "react";
+import { getCurrentYearAndQuarter } from "../../hooks/useVisionSummary";
+import { useRevenueMetrics } from "../../hooks/useRevenue";
 
-export default function CompanyRevenueOverview({ ytdMetric, yoyMetric, qoqMetric }) {
+export default function CompanyRevenueOverview() {
+  const { year, quarter } = getCurrentYearAndQuarter();
+  const quarterQuery = useRevenueMetrics("QUARTER", quarter);
+  const yearQuery = useRevenueMetrics("YEAR", year);
+
+  const metrics = quarterQuery.data ?? [];
+  const yearMetrics = yearQuery.data ?? [];
+  const metricByName = (name) => metrics.find((m) => m.METRIC_NAME === name) || {};
+  const yearMetricByName = (name) => yearMetrics.find((m) => m.METRIC_NAME === name) || {};
+
+  const ytdMetric = yearMetricByName("YTD Revenue");
+  const yoyMetric = metricByName("YoY Growth");
+  const qoqMetric = metricByName("QoQ Growth");
+
+  if (quarterQuery.isLoading || yearQuery.isLoading) {
+    return (
+      <div className="vision-row" style={{ overflow: "auto" }}>
+        <section className="panel-light" style={{ minWidth: 0 }}>
+          <div className="panel-header">Company Revenue Overview</div>
+          <div className="panel-sub">Loading…</div>
+        </section>
+      </div>
+    );
+  }
+
+  if (quarterQuery.error || yearQuery.error) {
+    return (
+      <div className="vision-row" style={{ overflow: "auto" }}>
+        <section className="panel-light" style={{ minWidth: 0 }}>
+          <div className="panel-header">Company Revenue Overview</div>
+          <div className="panel-sub">Failed to load metrics.</div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="vision-row" style={{ overflow: "auto" }}>
       <section className="panel-light" style={{ minWidth: 0 }}>
