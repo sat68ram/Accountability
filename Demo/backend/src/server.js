@@ -5,6 +5,7 @@ import authRouter from './routes/auth.js';
 import visionRouter from './routes/vision.js';
 import revenueRouter from './routes/revenue.js';
 import profitabilityRouter from './routes/profitability.js';
+import projectsRouter from './routes/projects.js';
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/api/auth', authRouter);
 app.use("/api/vision", visionRouter);
 app.use("/api/revenue", revenueRouter);
 app.use("/api/profitability", profitabilityRouter);
+app.use("/api/projects", projectsRouter);
 
 
 app.get('/', (_req, res) => {
