@@ -33,11 +33,12 @@ export default function PortfolioOverview() {
     );
   }
 
-  const totalProjects = Number(overview?.total_active_projects) || 0;
+  const ov = overview || {};
+  const totalProjects = Number(ov.TOTAL_ACTIVE_PROJECTS ?? ov.total_active_projects) || 0;
   const totalCountForPie = byProgram.reduce((sum, r) => sum + Number(r.PROJECT_COUNT || 0), 0) || 1;
-  const onTimePct = overview?.on_time_pct_so_far != null ? Number(overview.on_time_pct_so_far) : null;
-  const budgetPct = overview?.pct_projects_within_10pct_budget != null ? Number(overview.pct_projects_within_10pct_budget) : null;
-  const riskExp = overview?.risk_exposure_index_so_far != null ? Number(overview.risk_exposure_index_so_far) : null;
+  const onTimePct = (ov.ON_TIME_PCT_SO_FAR ?? ov.on_time_pct_so_far) != null ? Number(ov.ON_TIME_PCT_SO_FAR ?? ov.on_time_pct_so_far) : null;
+  const budgetPct = (ov.PCT_PROJECTS_WITHIN_10PCT_BUDGET ?? ov.pct_projects_within_10pct_budget) != null ? Number(ov.PCT_PROJECTS_WITHIN_10PCT_BUDGET ?? ov.pct_projects_within_10pct_budget) : null;
+  const riskExp = (ov.RISK_EXPOSURE_INDEX_SO_FAR ?? ov.risk_exposure_index_so_far) != null ? Number(ov.RISK_EXPOSURE_INDEX_SO_FAR ?? ov.risk_exposure_index_so_far) : null;
 
   const onTimeStatus = onTimePct != null ? (onTimePct >= 80 ? "good" : onTimePct >= 60 ? "warn" : "risk") : "warn";
   const budgetStatus = budgetPct != null ? (budgetPct >= 80 ? "good" : budgetPct >= 60 ? "warn" : "risk") : "warn";
@@ -61,20 +62,20 @@ export default function PortfolioOverview() {
         >
           <div className="metric-card metric-good">
             <div className="metric-label">Total Active Projects</div>
-            <div className="metric-value">{overview?.total_active_projects != null ? formatNumber(overview.total_active_projects) : "--"}</div>
+            <div className="metric-value">{(ov.TOTAL_ACTIVE_PROJECTS ?? ov.total_active_projects) != null ? formatNumber(ov.TOTAL_ACTIVE_PROJECTS ?? ov.total_active_projects) : "--"}</div>
             <div className="metric-hint">enterprise-wide</div>
           </div>
           <div className="metric-card metric-warn">
             <div className="metric-label">Avg Duration</div>
             <div className="metric-value">
-              {overview?.avg_duration_days != null ? Number(overview.avg_duration_days).toFixed(1) : "--"}
+              {(ov.AVG_DURATION_DAYS ?? ov.avg_duration_days) != null ? Number(ov.AVG_DURATION_DAYS ?? ov.avg_duration_days).toFixed(1) : "--"}
               <span> days</span>
             </div>
             <div className="metric-hint">start → GA</div>
           </div>
           <div className="metric-card metric-risk">
             <div className="metric-label">Total Spend YTD</div>
-            <div className="metric-value">{formatCurrency(overview?.total_spend_so_far_usd) ?? "--"}</div>
+            <div className="metric-value">{formatCurrency(ov.TOTAL_SPEND_SO_FAR_USD ?? ov.total_spend_so_far_usd) ?? "--"}</div>
             <div className="metric-hint">capex + opex</div>
           </div>
         </div>

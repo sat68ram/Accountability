@@ -37,9 +37,9 @@ export default function RiskBubbleChart() {
         <div className="bubble-axis"></div>
         {rows.length > 0 ? (
           rows.map((row, i) => {
-            const likelihood = Number(row.avg_likelihood_pct) || 0;
-            const impact = Number(row.avg_impact_score) || 0;
-            const exp = Number(row.risk_exposure_index) || 0;
+            const likelihood = Number(row.AVG_LIKELIHOOD_PCT ?? row.avg_likelihood_pct) || 0;
+            const impact = Number(row.AVG_IMPACT_SCORE ?? row.avg_impact_score) || 0;
+            const exp = Number(row.RISK_EXPOSURE_INDEX ?? row.risk_exposure_index) || 0;
             const left = maxLikelihood ? (likelihood / maxLikelihood) * 80 + 10 : 50;
             const bottom = maxImpact ? (impact / maxImpact) * 80 + 10 : 50;
             const size = maxExp ? 8 + (exp / maxExp) * 20 : 14;
