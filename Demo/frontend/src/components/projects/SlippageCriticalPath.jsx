@@ -36,11 +36,45 @@ export default function SlippageCriticalPath() {
     );
   }
 
-  const slackValues = rows.map((r) => Number(r.CRITICAL_SLACK_DAYS ?? r.critical_slack_days) ?? 0).filter((n) => !isNaN(n));
-  const points = slackValues.length
-    ? slackValues.map((v, i) => `${5 + (i * 90) / Math.max(slackValues.length - 1, 1)},${25 - Math.max(-15, Math.min(15, v))}`
-    ).join(" ")
+  const slackValues = rows
+    .map((r) => Number(r.CRITICAL_SLACK_DAYS ?? r.critical_slack_days))
+    .filter((n) => !Number.isNaN(n));
+
+  const hasData = slackValues.length > 0;
+  const minSlack = hasData ? Math.min(0, ...slackValues) : 0;
+  const maxSlack = hasData ? Math.max(0, ...slackValues) : 1;
+  const top = 8;
+  const bottom = 45;
+  const range = maxSlack - minSlack || 1;
+
+  const scaleY = (value) =>
+    bottom - ((value - minSlack) / range) * (bottom - top);
+
+  const count = rows.length || 1;
+  const xForIndex = (index) =>
+    count === 1 ? 50 : 5 + (index * 90) / Math.max(count - 1, 1);
+
+  const validPoints =
+    rows
+      .map((row, index) => {
+        const rawSlack = Number(row.CRITICAL_SLACK_DAYS ?? row.critical_slack_days);
+        if (Number.isNaN(rawSlack)) return null;
+        const x = xForIndex(index);
+        const y = scaleY(rawSlack);
+        return {
+          x,
+          y,
+          slack: rawSlack,
+          program: row.PROGRAM_NAME || row.PROGRAM_ID || "Program",
+        };
+      })
+      .filter(Boolean) || [];
+
+  const points = validPoints.length
+    ? validPoints.map((p) => `${p.x},${p.y}`).join(" ")
     : "5,25 95,25";
+
+  const xAxisY = scaleY(0); // place x-axis at 0 days slack
 
   return (
     <section className="panel-light">
@@ -51,9 +85,33 @@ export default function SlippageCriticalPath() {
 
       <div className="chart-burndown">
         <svg viewBox="0 0 100 50" preserveAspectRatio="none">
-          <line className="burndown-axis" x1="5" y1="45" x2="95" y2="45" />
+          {/* axes (x-axis at 0 days slack) */}
+          <line className="burndown-axis" x1="5" y1={xAxisY} x2="95" y2={xAxisY} />
           <line className="burndown-axis" x1="5" y1="5" x2="5" y2="45" />
+
+          {/* slippage curve */}
           <polyline className="burndown-actual" points={points} />
+
+          {/* data points with hover tooltips */}
+          {validPoints.map((p, i) => (
+            <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="#3b82f6">
+              <title>{`${p.program}: ${p.slack.toFixed(1)} days slack`}</title>
+            </circle>
+          ))}
+
+          {/* axis labels */}
+          <text x="50" y="49" textAnchor="middle" fontSize="3">
+            Programs
+          </text>
+          <text
+            x="2"
+            y="25"
+            textAnchor="middle"
+            fontSize="3"
+            transform="rotate(-90 2 25)"
+          >
+            Slack (days)
+          </text>
         </svg>
       </div>
 
