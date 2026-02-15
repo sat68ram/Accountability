@@ -341,32 +341,80 @@ ORDER BY constraint_risk_score DESC NULLS LAST
 export async function getRiskBubble() {
   const sql = `
 WITH open_risks AS (
-  SELECT p.PROGRAM_ID, r.PROJECT_ID, r.RISK_ID, r.PROBABILITY_PCT, r.SEVERITY
+  SELECT
+      p.PROGRAM_ID,
+      r.PROJECT_ID,
+      r.RISK_ID,
+      r.PROBABILITY_PCT,
+      r.SEVERITY,
+      r.IMPACT_USD
   FROM PMO_DB.FACTS.FACT_RISK r
-  JOIN PMO_DB.DIMENSIONS.DIM_PROJECT p ON p.PROJECT_ID = r.PROJECT_ID
-  WHERE r.STATUS = 'OPEN'
+  JOIN PMO_DB.DIMENSIONS.DIM_PROJECT p
+      ON p.PROJECT_ID = r.PROJECT_ID
+  WHERE UPPER(r.STATUS) = 'OPEN'
 ),
-risk_scored AS (
-  SELECT PROGRAM_ID, PROBABILITY_PCT,
-    CASE SEVERITY WHEN 'LOW' THEN 1 WHEN 'MEDIUM' THEN 2 WHEN 'HIGH' THEN 3 WHEN 'CRITICAL' THEN 5 ELSE 1 END AS impact_weight
+
+normalized AS (
+  SELECT
+      PROGRAM_ID,
+      PROBABILITY_PCT,
+      IMPACT_USD,
+
+      -- Financial weight (1–5)
+      NTILE(5) OVER (ORDER BY IMPACT_USD) AS financial_weight,
+
+      -- Severity weight
+      CASE UPPER(SEVERITY)
+          WHEN 'LOW' THEN 1
+          WHEN 'MEDIUM' THEN 2
+          WHEN 'HIGH' THEN 4
+          WHEN 'CRITICAL' THEN 5
+          ELSE 1
+      END AS severity_weight
   FROM open_risks
+),
+
+risk_scored AS (
+  SELECT
+      PROGRAM_ID,
+      PROBABILITY_PCT,
+
+      -- Combined impact weight (1–5 range)
+      ROUND(
+          (financial_weight * 0.6) +
+          (severity_weight * 0.4)
+      , 2) AS impact_weight
+
+  FROM normalized
 )
+
 SELECT
   rs.PROGRAM_ID,
   dp.PROGRAM_NAME,
+
   ROUND(AVG(rs.PROBABILITY_PCT), 1) AS avg_likelihood_pct,
   ROUND(AVG(rs.impact_weight), 2) AS avg_impact_score,
   COUNT(*) AS open_risk_count,
-  ROUND(AVG(rs.PROBABILITY_PCT)/100 * AVG(rs.impact_weight) * COUNT(*), 2) AS risk_exposure_index,
+
+  ROUND(
+      AVG(rs.PROBABILITY_PCT)/100
+      * AVG(rs.impact_weight)
+      * COUNT(*)
+  , 2) AS risk_exposure_index,
+
   CASE
-    WHEN AVG(rs.impact_weight) >= 4 OR AVG(rs.PROBABILITY_PCT) >= 70 THEN 'HIGH'
-    WHEN AVG(rs.impact_weight) >= 2.5 OR AVG(rs.PROBABILITY_PCT) >= 50 THEN 'MEDIUM'
+    WHEN AVG(rs.impact_weight) >= 4 THEN 'HIGH'
+    WHEN AVG(rs.impact_weight) >= 2.5 THEN 'MEDIUM'
     ELSE 'LOW'
   END AS risk_level
+
 FROM risk_scored rs
-JOIN PMO_DB.DIMENSIONS.DIM_PROGRAM dp ON dp.PROGRAM_ID = rs.PROGRAM_ID
+JOIN PMO_DB.DIMENSIONS.DIM_PROGRAM dp
+  ON dp.PROGRAM_ID = rs.PROGRAM_ID
+
 GROUP BY rs.PROGRAM_ID, dp.PROGRAM_NAME
-ORDER BY risk_exposure_index DESC
+ORDER BY risk_exposure_index DESC;
+
   `;
   return query(sql);
 }
