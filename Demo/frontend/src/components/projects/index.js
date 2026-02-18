@@ -6,6 +6,6 @@ export { default as EvAcPv } from "./EvAcPv.jsx";
 export { default as UtilizationHeatmap } from "./UtilizationHeatmap.jsx";
 export { default as ConstrainedSkills } from "./ConstrainedSkills.jsx";
 export { default as RiskBubbleChart } from "./RiskBubbleChart.jsx";
-export { default as IssuesExceptions } from "./IssuesExceptions.jsx";
+export { default as ProjectRisksExceptions } from "./ProjectRisksExceptions.jsx";
 export { default as GateReadinessSummary } from "./GateReadinessSummary.jsx";
 export { formatCurrency, formatNumber } from "./formatUtils.js";

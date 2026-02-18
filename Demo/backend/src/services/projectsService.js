@@ -418,3 +418,251 @@ ORDER BY risk_exposure_index DESC;
   `;
   return query(sql);
 }
+
+/** Panel 9: Project Risks & Exceptions – two bar charts (opened by month + actively open by month) + table */
+export async function getProjectRisksExceptions() {
+  const sqlOpenedByMonth = `
+WITH risk_base AS (
+  SELECT
+    CASE
+      WHEN UPPER(r.SEVERITY) = 'CRITICAL' THEN 'CRITICAL'
+      WHEN UPPER(r.SEVERITY) = 'HIGH' AND COALESCE(r.IMPACT_USD, 0) > 10000000 THEN 'MAJOR'
+    END AS RISK_LEVEL,
+    r.OPEN_DATE,
+    r.CLOSE_DATE
+  FROM PMO_DB.FACTS.FACT_RISK r
+  WHERE (UPPER(r.SEVERITY) = 'CRITICAL' OR (UPPER(r.SEVERITY) = 'HIGH' AND r.IMPACT_USD > 10000000))
+    AND r.OPEN_DATE IS NOT NULL
+),
+bucketed AS (
+  SELECT
+    DATE_TRUNC('MONTH', OPEN_DATE) AS OPEN_MONTH,
+    RISK_LEVEL
+  FROM risk_base
+  WHERE RISK_LEVEL IS NOT NULL
+    AND DATE_TRUNC('MONTH', OPEN_DATE) >= DATEADD('MONTH', -3, DATE_TRUNC('MONTH', CURRENT_DATE()))
+    AND DATE_TRUNC('MONTH', OPEN_DATE) <= DATE_TRUNC('MONTH', CURRENT_DATE())
+)
+SELECT
+  OPEN_MONTH,
+  COUNT(CASE WHEN RISK_LEVEL = 'CRITICAL' THEN 1 END) AS CRITICAL_COUNT,
+  COUNT(CASE WHEN RISK_LEVEL = 'MAJOR' THEN 1 END) AS MAJOR_COUNT
+FROM bucketed
+GROUP BY OPEN_MONTH
+ORDER BY OPEN_MONTH
+  `;
+  const sqlActivelyOpenByMonth = `
+WITH risk_base AS (
+  SELECT
+    CASE
+      WHEN UPPER(r.SEVERITY) = 'CRITICAL' THEN 'CRITICAL'
+      WHEN UPPER(r.SEVERITY) = 'HIGH' AND COALESCE(r.IMPACT_USD, 0) > 10000000 THEN 'MAJOR'
+    END AS RISK_LEVEL,
+    r.OPEN_DATE,
+    r.CLOSE_DATE
+  FROM PMO_DB.FACTS.FACT_RISK r
+  WHERE (UPPER(r.SEVERITY) = 'CRITICAL' OR (UPPER(r.SEVERITY) = 'HIGH' AND r.IMPACT_USD > 10000000))
+    AND r.OPEN_DATE IS NOT NULL
+),
+month_ends AS (
+  SELECT DATE_TRUNC('MONTH', CURRENT_DATE()) AS month_start,
+         LAST_DAY(DATE_TRUNC('MONTH', CURRENT_DATE()), 'MONTH') AS month_end
+  UNION ALL
+  SELECT DATEADD('MONTH', -1, DATE_TRUNC('MONTH', CURRENT_DATE())),
+         LAST_DAY(DATEADD('MONTH', -1, CURRENT_DATE()), 'MONTH')
+  UNION ALL
+  SELECT DATEADD('MONTH', -2, DATE_TRUNC('MONTH', CURRENT_DATE())),
+         LAST_DAY(DATEADD('MONTH', -2, CURRENT_DATE()), 'MONTH')
+  UNION ALL
+  SELECT DATEADD('MONTH', -3, DATE_TRUNC('MONTH', CURRENT_DATE())),
+         LAST_DAY(DATEADD('MONTH', -3, CURRENT_DATE()), 'MONTH')
+),
+actively_open AS (
+  SELECT
+    me.month_start,
+    rb.RISK_LEVEL
+  FROM month_ends me
+  CROSS JOIN risk_base rb
+  WHERE rb.RISK_LEVEL IS NOT NULL
+    AND rb.OPEN_DATE <= me.month_end
+    AND (rb.CLOSE_DATE IS NULL OR rb.CLOSE_DATE > me.month_end)
+)
+SELECT
+  month_start AS MONTH_END,
+  COUNT(CASE WHEN RISK_LEVEL = 'CRITICAL' THEN 1 END) AS CRITICAL_COUNT,
+  COUNT(CASE WHEN RISK_LEVEL = 'MAJOR' THEN 1 END) AS MAJOR_COUNT
+FROM actively_open
+GROUP BY month_start
+ORDER BY month_start
+  `;
+  const sqlSummary = `
+WITH classified AS (
+  SELECT
+    r.RISK_ID,
+    r.OPEN_DATE,
+    r.CLOSE_DATE,
+    r.STATUS,
+    CASE
+      WHEN UPPER(r.SEVERITY) = 'CRITICAL' THEN 'CRITICAL'
+      WHEN UPPER(r.SEVERITY) = 'HIGH' AND COALESCE(r.IMPACT_USD, 0) > 10000000 THEN 'MAJOR'
+    END AS RISK_LEVEL
+  FROM PMO_DB.FACTS.FACT_RISK r
+  WHERE r.OPEN_DATE IS NOT NULL
+)
+SELECT
+  COUNT(CASE WHEN RISK_LEVEL = 'CRITICAL' AND OPEN_DATE >= DATEADD('DAY', -30, CURRENT_DATE()) THEN 1 END) AS CRITICAL_LAST_30,
+  COUNT(CASE WHEN RISK_LEVEL = 'CRITICAL' AND (CLOSE_DATE IS NULL OR UPPER(STATUS) = 'OPEN') THEN 1 END) AS CRITICAL_OPEN,
+  COUNT(CASE WHEN RISK_LEVEL = 'MAJOR' AND OPEN_DATE >= DATEADD('DAY', -30, CURRENT_DATE()) THEN 1 END) AS MAJOR_LAST_30,
+  COUNT(CASE WHEN RISK_LEVEL = 'MAJOR' AND (CLOSE_DATE IS NULL OR UPPER(STATUS) = 'OPEN') THEN 1 END) AS MAJOR_OPEN
+FROM classified
+WHERE RISK_LEVEL IN ('CRITICAL', 'MAJOR')
+  `;
+
+  const [openedRows, activelyOpenRows, summaryRows] = await Promise.all([
+    query(sqlOpenedByMonth),
+    query(sqlActivelyOpenByMonth),
+    query(sqlSummary),
+  ]);
+
+  const currentMonth = new Date();
+  const months = [
+    { offset: -3, label: '3mo ago' },
+    { offset: -2, label: '2mo ago' },
+    { offset: -1, label: '1mo ago' },
+    { offset: 0, label: 'Current' },
+  ];
+
+  const toMonthStart = (offset) => {
+    const d = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + offset, 1);
+    return d.toISOString().slice(0, 7);
+  };
+
+  const openedByMonth = months.map((m, i) => {
+    const monthKey = toMonthStart(m.offset);
+    const row = openedRows.find((r) => {
+      const openMonth = r.OPEN_MONTH ?? r.open_month;
+      if (!openMonth) return false;
+      const d = new Date(openMonth);
+      const str = d.toISOString().slice(0, 7);
+      return str === monthKey;
+    });
+    return {
+      label: m.label,
+      monthKey,
+      criticalCount: Number(row?.CRITICAL_COUNT ?? row?.critical_count ?? 0),
+      majorCount: Number(row?.MAJOR_COUNT ?? row?.major_count ?? 0),
+    };
+  });
+
+  const activelyOpenByMonth = months.map((m, i) => {
+    const row = activelyOpenRows[i] || activelyOpenRows.find((r) => {
+      const me = r.MONTH_END ?? r.month_end;
+      if (!me) return false;
+      const d = new Date(me);
+      const str = d.toISOString().slice(0, 7);
+      return str === toMonthStart(m.offset);
+    });
+    return {
+      label: m.label,
+      criticalCount: Number(row?.CRITICAL_COUNT ?? row?.critical_count ?? 0),
+      majorCount: Number(row?.MAJOR_COUNT ?? row?.major_count ?? 0),
+    };
+  });
+
+  const s = summaryRows[0] || {};
+  return {
+    openedByMonth,
+    activelyOpenByMonth,
+    criticalLast30: Number(s.CRITICAL_LAST_30 ?? s.critical_last_30 ?? 0),
+    criticalOpen: Number(s.CRITICAL_OPEN ?? s.critical_open ?? 0),
+    majorLast30: Number(s.MAJOR_LAST_30 ?? s.major_last_30 ?? 0),
+    majorOpen: Number(s.MAJOR_OPEN ?? s.major_open ?? 0),
+  };
+}
+
+/** Panel 10: Gate / Readiness Summary – stage distribution (current + 1 month ago) */
+export async function getGateReadiness() {
+  const sqlCurrent = `
+WITH latest_stage AS (
+  SELECT
+    PROJECT_ID,
+    STAGE_ID,
+    ROW_NUMBER() OVER (PARTITION BY PROJECT_ID ORDER BY GATE_DATE_ACTUAL DESC NULLS LAST) AS rn
+  FROM PMO_DB.FACTS.FACT_STAGE_STATUS
+  WHERE GATE_DATE_ACTUAL IS NOT NULL
+),
+current_stage AS (
+  SELECT PROJECT_ID, STAGE_ID
+  FROM latest_stage
+  WHERE rn = 1
+)
+SELECT
+  sg.STAGE_NAME,
+  sg.STAGE_ORDER,
+  COUNT(cs.PROJECT_ID) AS PROJECT_COUNT
+FROM current_stage cs
+JOIN PMO_DB.DIMENSIONS.DIM_STAGE_GATE sg ON cs.STAGE_ID = sg.STAGE_ID
+GROUP BY sg.STAGE_NAME, sg.STAGE_ORDER
+ORDER BY sg.STAGE_ORDER
+  `;
+  const sqlOneMonthAgo = `
+WITH cutoff AS (
+  SELECT LAST_DAY(DATEADD('MONTH', -1, CURRENT_DATE()), 'MONTH') AS end_of_last_month
+),
+latest_stage_before_cutoff AS (
+  SELECT
+    fp.PROJECT_ID,
+    fp.STAGE_ID,
+    ROW_NUMBER() OVER (PARTITION BY fp.PROJECT_ID ORDER BY fp.GATE_DATE_ACTUAL DESC NULLS LAST) AS rn
+  FROM PMO_DB.FACTS.FACT_STAGE_STATUS fp
+  CROSS JOIN cutoff c
+  WHERE fp.GATE_DATE_ACTUAL IS NOT NULL
+    AND fp.GATE_DATE_ACTUAL <= c.end_of_last_month
+),
+stage_one_month_ago AS (
+  SELECT PROJECT_ID, STAGE_ID
+  FROM latest_stage_before_cutoff
+  WHERE rn = 1
+)
+SELECT
+  sg.STAGE_NAME,
+  sg.STAGE_ORDER,
+  COUNT(s.PROJECT_ID) AS PROJECT_COUNT
+FROM stage_one_month_ago s
+JOIN PMO_DB.DIMENSIONS.DIM_STAGE_GATE sg ON s.STAGE_ID = sg.STAGE_ID
+GROUP BY sg.STAGE_NAME, sg.STAGE_ORDER
+ORDER BY sg.STAGE_ORDER
+  `;
+
+  const [currentRows, oneMonthAgoRows] = await Promise.all([
+    query(sqlCurrent),
+    query(sqlOneMonthAgo),
+  ]);
+
+  const stagesFromDb = currentRows.length > 0 ? currentRows : oneMonthAgoRows;
+  const stageOrder = stagesFromDb.length > 0
+    ? [...stagesFromDb].sort((a, b) => (a.STAGE_ORDER ?? a.stage_order ?? 0) - (b.STAGE_ORDER ?? b.stage_order ?? 0))
+        .map((r) => (r.STAGE_NAME ?? r.stage_name) || 'Unknown')
+    : ['Concept', 'Prototype', 'Pilot', 'Release'];
+
+  const mapToStages = (rows) => {
+    return stageOrder.map((name) => {
+      const row = rows.find((r) =>
+        ((r.STAGE_NAME ?? r.stage_name) || '').toLowerCase().includes((name || '').toLowerCase())
+      );
+      return {
+        stageName: name,
+        projectCount: Number(row?.PROJECT_COUNT ?? row?.project_count ?? 0),
+      };
+    });
+  };
+
+  return {
+    current: mapToStages(currentRows),
+    oneMonthAgo: mapToStages(oneMonthAgoRows),
+    specsFrozen: null,
+    designReviewsClosed: null,
+    toolQualYield: null,
+    fabAcceptance: null,
+  };
+}

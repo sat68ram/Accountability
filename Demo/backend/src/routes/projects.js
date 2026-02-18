@@ -9,6 +9,8 @@ import {
   getUtilizationByTeamByQuarter,
   getConstrainedTeams,
   getRiskBubble,
+  getProjectRisksExceptions,
+  getGateReadiness,
 } from "../services/projectsService.js";
 
 const router = Router();
@@ -32,5 +34,7 @@ router.get("/ev-ac-pv", handleQuery(getEvAcPv, "EV/AC/PV"));
 router.get("/utilization-by-team-by-quarter", handleQuery(getUtilizationByTeamByQuarter, "Utilization by team by quarter"));
 router.get("/constrained-teams", handleQuery(getConstrainedTeams, "Constrained teams"));
 router.get("/risk-bubble", handleQuery(getRiskBubble, "Risk bubble"));
+router.get("/project-risks-exceptions", handleQuery(getProjectRisksExceptions, "Project risks & exceptions"));
+router.get("/gate-readiness", handleQuery(getGateReadiness, "Gate readiness"));
 
 export default router;

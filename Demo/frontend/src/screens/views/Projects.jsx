@@ -8,7 +8,7 @@ import {
   UtilizationHeatmap,
   ConstrainedSkills,
   RiskBubbleChart,
-  IssuesExceptions,
+  ProjectRisksExceptions,
   GateReadinessSummary,
 } from "../../components/projects";
 
@@ -34,7 +34,7 @@ export default function Projects() {
 
       <div className="vision-row vision-row-2">
         <RiskBubbleChart />
-        <IssuesExceptions />
+        <ProjectRisksExceptions />
       </div>
 
       <GateReadinessSummary />

@@ -78,3 +78,19 @@ export function useRiskBubble() {
     enabled: true,
   });
 }
+
+export function useProjectRisksExceptions() {
+  return useQuery({
+    queryKey: ["projects", "projectRisksExceptions"],
+    queryFn: () => projectsApi("project-risks-exceptions"),
+    enabled: true,
+  });
+}
+
+export function useGateReadiness() {
+  return useQuery({
+    queryKey: ["projects", "gateReadiness"],
+    queryFn: () => projectsApi("gate-readiness"),
+    enabled: true,
+  });
+}

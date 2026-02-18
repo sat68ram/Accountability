@@ -1,0 +1,146 @@
+WITH risk_base AS (
+
+    SELECT
+
+        CASE
+            WHEN UPPER(r.SEVERITY) = 'CRITICAL'
+                THEN 'CRITICAL'
+
+            WHEN UPPER(r.SEVERITY) = 'HIGH'
+                 AND r.IMPACT_USD > 10000000
+                THEN 'MAJOR'
+        END AS RISK_LEVEL,
+
+        r.PROJECT_ID,
+        p.PROJECT_NAME,
+        r.RISK_ID,
+        r.STATUS,
+
+        r.OPEN_DATE,
+        r.CLOSE_DATE,
+
+        DATEDIFF(
+            DAY,
+            r.OPEN_DATE,
+            COALESCE(r.CLOSE_DATE, CURRENT_DATE)
+        ) AS DAYS_OPEN,
+
+        r.PROBABILITY_PCT,
+        r.IMPACT_USD,
+
+        ROUND(
+            (r.PROBABILITY_PCT / 100) * r.IMPACT_USD,
+            2
+        ) AS RISK_EXPOSURE_USD,
+
+        r.MITIGATION
+
+    FROM PMO_DB.FACTS.FACT_RISK r
+
+    JOIN PMO_DB.DIMENSIONS.DIM_PROJECT p
+        ON r.PROJECT_ID = p.PROJECT_ID
+
+    WHERE
+        UPPER(r.SEVERITY) = 'CRITICAL'
+        OR (UPPER(r.SEVERITY) = 'HIGH' AND r.IMPACT_USD > 10000000)
+
+)
+
+SELECT
+
+    *,
+
+    CASE
+
+        WHEN DAYS_OPEN <= 30
+            THEN 'CURRENT'
+
+        WHEN DAYS_OPEN <= 60
+            THEN '30 DAYS'
+
+        WHEN DAYS_OPEN <= 90
+            THEN '60 DAYS'
+
+        WHEN DAYS_OPEN <= 120
+            THEN '90 DAYS'
+
+        ELSE '>90 DAYS'
+
+    END AS AGING_BUCKET
+
+FROM risk_base
+
+ORDER BY
+
+    CASE
+        WHEN RISK_LEVEL = 'CRITICAL' THEN 1
+        ELSE 2
+    END,
+
+    DAYS_OPEN DESC;
+
+
+select * from pmo_db.dimensions.dim_stage_gate;
+
+
+
+WITH monthly_stage AS (
+
+    SELECT
+
+        DATE_TRUNC('MONTH', GATE_DATE_ACTUAL) AS STAGE_MONTH,
+        PROJECT_ID,
+        STAGE_ID
+       
+
+    FROM PMO_DB.FACTS.FACT_STAGE_STATUS
+
+    WHERE GATE_DATE_ACTUAL IS NOT NULL
+
+),
+
+monthly_total AS (
+
+    SELECT
+        STAGE_MONTH,
+        COUNT(DISTINCT PROJECT_ID) AS total_projects
+    FROM monthly_stage
+    GROUP BY STAGE_MONTH
+
+)
+
+SELECT
+
+    ms.STAGE_MONTH,
+    sg.stage_id,
+    sg.STAGE_NAME,
+
+    COUNT(DISTINCT ms.PROJECT_ID) AS PROJECT_COUNT,
+
+    ROUND(
+        COUNT(DISTINCT ms.PROJECT_ID) * 100.0
+        / mt.total_projects,
+        2
+    ) AS PERCENTAGE
+
+FROM monthly_stage ms
+
+JOIN PMO_DB.DIMENSIONS.DIM_STAGE_GATE sg
+    ON ms.STAGE_ID = sg.STAGE_ID
+
+JOIN monthly_total mt
+    ON ms.STAGE_MONTH = mt.STAGE_MONTH
+
+GROUP BY
+
+    ms.STAGE_MONTH,
+    sg.STAGE_NAME,
+    sg.stage_id,
+    sg.STAGE_ORDER,
+   
+    mt.total_projects
+
+ORDER BY
+
+    ms.STAGE_MONTH,
+    sg.STAGE_ORDER;
