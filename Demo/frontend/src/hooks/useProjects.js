@@ -31,6 +31,14 @@ export function useScheduleHealth() {
   });
 }
 
+export function useTaskBurndown() {
+  return useQuery({
+    queryKey: ["projects", "taskBurndown"],
+    queryFn: () => projectsApi("task-burndown"),
+    enabled: true,
+  });
+}
+
 export function useSlippageByProgram() {
   return useQuery({
     queryKey: ["projects", "slippageByProgram"],

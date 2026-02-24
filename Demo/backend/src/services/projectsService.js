@@ -114,6 +114,32 @@ ORDER BY h.RAG_STATUS, h.SCHEDULE_SCORE
   return query(sql);
 }
 
+/** Burndown data by program/project/week */
+export async function getTaskBurndown() {
+  const sql = `
+SELECT
+    prog.PROGRAM_ID,
+    prog.PROGRAM_NAME,
+    proj.PROJECT_ID,
+    bd.WEEK_START_DATE,
+    bd.TOTAL_TASKS,
+    bd.TASKS_COMPLETED,
+    bd.TASKS_REMAINING,
+    bd.BURNDOWN_PCT,
+    bd.STATUS
+FROM PMO_DB.FACTS.FACT_TASK_BURNDOWN bd
+JOIN PMO_DB.DIMENSIONS.DIM_PROJECT proj
+    ON bd.PROJECT_ID = proj.PROJECT_ID
+JOIN PMO_DB.DIMENSIONS.DIM_PROGRAM prog
+    ON proj.PROGRAM_ID = prog.PROGRAM_ID
+ORDER BY
+    prog.PROGRAM_ID,
+    proj.PROJECT_ID,
+    bd.WEEK_START_DATE
+  `;
+  return query(sql);
+}
+
 /** Panel 3: Slippage vs Programs (critical path per program) */
 export async function getSlippageByProgram() {
   const sql = `

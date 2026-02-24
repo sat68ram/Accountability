@@ -1,5 +1,6 @@
 import React from "react";
 import { useScheduleHealth } from "../../hooks/useProjects";
+import ProgramBurndown from "./ProgramBurndown.jsx";
 
 function ragClass(rag) {
   const r = (rag || "").toUpperCase();
@@ -143,29 +144,7 @@ export default function ScheduleHealth() {
         </div>
       </div>
 
-      <div className="chart-burndown">
-        <svg viewBox="0 0 100 50" preserveAspectRatio="none">
-          <g className="burndown-grid">
-            <line x1="0" y1="10" x2="100" y2="10" />
-            <line x1="0" y1="20" x2="100" y2="20" />
-            <line x1="0" y1="30" x2="100" y2="30" />
-            <line x1="0" y1="40" x2="100" y2="40" />
-          </g>
-          <line className="burndown-axis" x1="5" y1="45" x2="95" y2="45" />
-          <line className="burndown-axis" x1="5" y1="5" x2="5" y2="45" />
-          {rows.length > 0 && (() => {
-            const top = 8;
-            const bottom = 45;
-            const pts = rows.slice(0, 10).map((r, i) => {
-              const val = Number(r.DELAYED_PROJECT_PCT ?? 0) || 0;
-              const y = bottom - ((val - minDelayed) / delayedRange) * (bottom - top);
-              const x = 5 + (i * 90) / Math.max(rows.length - 1, 1);
-              return `${x},${Math.max(top, Math.min(bottom, y))}`;
-            });
-            return <polyline className="burndown-actual" points={pts.join(" ")} />;
-          })()}
-        </svg>
-      </div>
+      <ProgramBurndown />
     </section>
   );
 }

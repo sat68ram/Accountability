@@ -3,6 +3,7 @@ import {
   getPortfolioOverview,
   getProjectsByProgram,
   getScheduleHealth,
+  getTaskBurndown,
   getSlippageByProgram,
   getBudgetVsActualByMonth,
   getEvAcPv,
@@ -28,6 +29,7 @@ const handleQuery = (handler, errorLabel) => async (_req, res) => {
 router.get("/portfolio-overview", handleQuery(getPortfolioOverview, "Portfolio overview"));
 router.get("/projects-by-program", handleQuery(getProjectsByProgram, "Projects by program"));
 router.get("/schedule-health", handleQuery(getScheduleHealth, "Schedule health"));
+router.get("/task-burndown", handleQuery(getTaskBurndown, "Task burndown"));
 router.get("/slippage-by-program", handleQuery(getSlippageByProgram, "Slippage by program"));
 router.get("/budget-vs-actual-by-month", handleQuery(getBudgetVsActualByMonth, "Budget vs actual by month"));
 router.get("/ev-ac-pv", handleQuery(getEvAcPv, "EV/AC/PV"));
