@@ -46,7 +46,7 @@ export default function PortfolioOverview() {
 
   return (
     <div className="vision-row">
-      <section className="panel-light">
+      <section className="panel-light" style={{ overflowX: "auto" }}>
         <div className="panel-header">Portfolio Overview</div>
         <div className="panel-sub">
           Timeliness and accountability view across all active projects.

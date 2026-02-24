@@ -49,7 +49,7 @@ export default function ScheduleHealth() {
   const delayedRange = Math.max(maxDelayed - minDelayed, 1);
 
   return (
-    <section className="panel-light">
+    <section className="panel-light" style={{ overflowX: "auto" }}>
       <div className="panel-header">Schedule Health – Major Programs</div>
       <div className="panel-sub">
         High-level view of key node programs and milestone burn-down.

@@ -84,7 +84,7 @@ export default function GateReadinessSummary() {
 
   return (
     <div className="vision-row">
-      <section className="panel-light">
+      <section className="panel-light" style={{ overflowX: "auto" }}>
         <div className="panel-header">Gate / Readiness Summary</div>
         <div className="panel-sub">
           Program readiness by gate plus design maturity & qualification yields.

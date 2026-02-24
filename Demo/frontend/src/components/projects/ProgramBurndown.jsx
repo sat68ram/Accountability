@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTaskBurndown } from "../../hooks/useProjects";
 
 export default function ProgramBurndown() {
@@ -16,9 +16,14 @@ export default function ProgramBurndown() {
     return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
   }, [data]);
 
-  const [selectedProgramId, setSelectedProgramId] = useState(
-    () => (programs[0] && programs[0].id) || null
-  );
+  const [selectedProgramId, setSelectedProgramId] = useState(null);
+
+  // When programs load, default to the first one so the chart renders immediately
+  useEffect(() => {
+    if (!selectedProgramId && programs.length > 0) {
+      setSelectedProgramId(programs[0].id);
+    }
+  }, [selectedProgramId, programs]);
 
   const series = useMemo(() => {
     if (!selectedProgramId) return [];
@@ -94,7 +99,10 @@ export default function ProgramBurndown() {
     programs.find((p) => p.id === selectedProgramId) || programs[0];
 
   return (
-    <div className="chart-burndown" style={{ position: "relative" }}>
+    <div
+      className="chart-burndown"
+      style={{ position: "relative", width: "80%", margin: "0 auto" }}
+    >
       <div
         style={{
           position: "absolute",
@@ -160,6 +168,20 @@ export default function ProgramBurndown() {
             })}
           </>
         )}
+
+        {/* axis labels */}
+        <text x="50" y="49" textAnchor="middle" fontSize="3">
+          Weeks
+        </text>
+        <text
+          x="2"
+          y="25"
+          textAnchor="middle"
+          fontSize="3"
+          transform="rotate(-90 2 25)"
+        >
+          Tasks Remaining
+        </text>
       </svg>
     </div>
   );
