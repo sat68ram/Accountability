@@ -43,7 +43,9 @@ export default function RiskBubbleChart() {
             const left = maxLikelihood ? (likelihood / maxLikelihood) * 80 + 10 : 50;
             const bottom = maxImpact ? (impact / maxImpact) * 80 + 10 : 50;
             const size = maxExp ? 8 + (exp / maxExp) * 20 : 14;
-            const label = `${row.PROGRAM_NAME || row.PROGRAM_ID} – ${(row.RISK_LEVEL ?? row.risk_level) || ""} / ${likelihood.toFixed(0)}%`;
+            const impactUsd = row.AVG_IMPACT_USD ?? row.avg_impact_usd;
+            const impactUsdStr = impactUsd != null ? ` / $${Number(impactUsd).toLocaleString()}` : "";
+            const label = `${row.PROGRAM_NAME || row.PROGRAM_ID} – ${(row.RISK_LEVEL ?? row.risk_level) || ""} / ${likelihood.toFixed(0)}%${impactUsdStr}`;
             return (
               <div
                 key={row.PROGRAM_ID || i}

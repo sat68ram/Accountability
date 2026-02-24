@@ -1,6 +1,8 @@
 import React from "react";
 import { useProjectRisksExceptions } from "../../hooks/useProjects";
 
+const BAR_MAX_HEIGHT_PX = 160;
+
 function RisksBarChart({ data, title }) {
   const flatBars = data.flatMap((b) => [
     { label: b.label, level: "Critical", count: b.criticalCount },
@@ -14,18 +16,23 @@ function RisksBarChart({ data, title }) {
       <div className="risks-bars-y-label">Count</div>
       <div className="risks-bars-content">
         <div className="risks-bars-grid">
-          {flatBars.map((bar, i) => (
+          {flatBars.map((bar, i) => {
+            const barHeightPx = maxCount
+              ? Math.max(4, Math.round((bar.count / maxCount) * BAR_MAX_HEIGHT_PX))
+              : 0;
+            return (
             <div key={i} className="risks-bar-col">
-              <div
-                className={`risks-bar risks-bar-${bar.level.toLowerCase()}`}
-                style={{
-                  height: maxCount ? `${Math.max(4, (bar.count / maxCount) * 100)}%` : "0%",
-                }}
-                title={`${bar.label} – ${bar.level}: ${bar.count}`}
-              ></div>
+              <div className="risks-bar-track">
+                <div
+                  className={`risks-bar risks-bar-${bar.level.toLowerCase()}`}
+                  style={{ height: `${barHeightPx}px` }}
+                  title={`${bar.label} – ${bar.level}: ${bar.count}`}
+                ></div>
+              </div>
               <div className="risks-bar-val">{bar.count}</div>
             </div>
-          ))}
+            );
+          })}
         </div>
         <div className="risks-bars-x-labels">
           {data.map((b, i) => (
@@ -80,6 +87,7 @@ export default function ProjectRisksExceptions() {
         <RisksBarChart data={activelyOpenByMonth} title="Actively open by month" />
       </div>
 
+      <div className="panel-scroll-content">
       <table className="table-small">
         <thead>
           <tr>
@@ -101,6 +109,7 @@ export default function ProjectRisksExceptions() {
           </tr>
         </tbody>
       </table>
+      </div>
     </section>
   );
 }

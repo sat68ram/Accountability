@@ -126,6 +126,7 @@ export default function EvAcPv() {
         </svg>
       </div>
 
+      <div className="panel-scroll-content">
       <div className="overrun-list">
         {overCost.length > 0 ? (
           overCost.slice(0, 5).map((row, i) => {
@@ -144,6 +145,7 @@ export default function EvAcPv() {
             <span className="overrun-label">No over-cost programs</span>
           </div>
         )}
+      </div>
       </div>
     </section>
   );

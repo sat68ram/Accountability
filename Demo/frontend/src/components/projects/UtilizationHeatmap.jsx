@@ -58,6 +58,7 @@ export default function UtilizationHeatmap() {
       <div className="panel-header">Engineering Utilization Heatmap</div>
       <div className="panel-sub">Utilization by group vs quarter.</div>
 
+      <div className="panel-scroll-content">
       <div className="chart-heatmap-util">
         <div className="util-row">
           <div className="util-label"></div>
@@ -81,6 +82,7 @@ export default function UtilizationHeatmap() {
             })}
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

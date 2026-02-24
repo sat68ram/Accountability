@@ -1,10 +1,20 @@
 /* === VISION-SPECIFIC SHARED STYLES === */
 
+/* Allow main content to scroll when dashboard content overflows */
+#screen-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  align-self: stretch;
+}
+
 .vision-layout {
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-bottom: 24px;
 }
 
 .vision-row {
@@ -15,6 +25,10 @@
 
 .vision-row-2 {
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+
+.vision-row-full {
+  grid-template-columns: 1fr;
 }
 
 .vision-row-3 {
@@ -66,6 +80,13 @@
 .panel-sub {
   font-size: 0.9rem;
   color: #6b7280;
+}
+
+/* Scrollable content for panels with tables/lists - prevents excessive vertical growth */
+.panel-scroll-content {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .link-pill {
@@ -990,7 +1011,7 @@
   border: 1px solid #e5e7eb;
   padding: 12px 16px;
   font-size: 0.8rem;
-  min-height: 180px;
+  min-height: 260px;
   display: flex;
   align-items: stretch;
   gap: 8px;
@@ -1018,7 +1039,7 @@
   align-items: flex-end;
   justify-content: space-around;
   gap: 4px;
-  min-height: 100px;
+  min-height: 180px;
 }
 
 .risks-bar-col {
@@ -1027,6 +1048,14 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+}
+
+.risks-bar-track {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .risks-bar {
@@ -1071,12 +1100,20 @@
   color: #9ca3af;
 }
 
+/* Gate / Readiness ? horizontally scrollable for long stage names */
+.gate-panel-scroll-x {
+  overflow-x: auto;
+  overflow-y: visible;
+  margin-top: 10px;
+}
+
 /* Gate / Readiness ? two stage bar charts */
 .gate-charts-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  margin-top: 10px;
+  margin-top: 0;
+  min-width: min-content;
 }
 
 .chart-stage-bars-wrapper {
@@ -1092,7 +1129,7 @@
   border: 1px solid #e5e7eb;
   padding: 12px 16px;
   font-size: 0.8rem;
-  min-height: 180px;
+  min-height: 260px;
   display: flex;
   align-items: stretch;
   gap: 8px;
@@ -1126,7 +1163,7 @@
   align-items: flex-end;
   justify-content: space-around;
   gap: 4px;
-  min-height: 100px;
+  min-height: 180px;
 }
 
 .stage-bar-col {
@@ -1135,6 +1172,14 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+}
+
+.stage-bar-track {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .stage-bar {

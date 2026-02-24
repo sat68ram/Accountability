@@ -32,12 +32,17 @@ export default function Projects() {
         <ConstrainedSkills />
       </div>
 
-      <div className="vision-row vision-row-2">
+      <div className="vision-row">
         <RiskBubbleChart />
+      </div>
+
+      <div className="vision-row vision-row-full">
         <ProjectRisksExceptions />
       </div>
 
-      <GateReadinessSummary />
+      <div className="vision-row vision-row-full">
+        <GateReadinessSummary />
+      </div>
     </div>
   );
 }

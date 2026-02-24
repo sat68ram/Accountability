@@ -39,6 +39,7 @@ export default function BudgetVsActual() {
       <div className="panel-header">Portfolio Budget vs Actual</div>
       <div className="panel-sub">Stacked bars by month – budget vs actual spend.</div>
 
+      <div className="panel-scroll-content">
       <div className="chart-stacked-bars">
         {rows.length > 0 ? (
           rows.map((row, i) => {
@@ -65,6 +66,7 @@ export default function BudgetVsActual() {
             </div>
           </div>
         )}
+      </div>
       </div>
     </section>
   );

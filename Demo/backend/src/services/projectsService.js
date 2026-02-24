@@ -378,13 +378,12 @@ risk_scored AS (
   SELECT
       PROGRAM_ID,
       PROBABILITY_PCT,
-
+      IMPACT_USD,
       -- Combined impact weight (1–5 range)
       ROUND(
           (financial_weight * 0.6) +
           (severity_weight * 0.4)
       , 2) AS impact_weight
-
   FROM normalized
 )
 
@@ -394,6 +393,7 @@ SELECT
 
   ROUND(AVG(rs.PROBABILITY_PCT), 1) AS avg_likelihood_pct,
   ROUND(AVG(rs.impact_weight), 2) AS avg_impact_score,
+  ROUND(AVG(rs.IMPACT_USD), 0) AS avg_impact_usd,
   COUNT(*) AS open_risk_count,
 
   ROUND(

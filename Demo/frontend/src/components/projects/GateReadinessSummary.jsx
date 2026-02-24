@@ -1,6 +1,8 @@
 import React from "react";
 import { useGateReadiness } from "../../hooks/useProjects";
 
+const BAR_MAX_HEIGHT_PX = 160;
+
 function StageBarChart({ data, title }) {
   const maxCount = Math.max(...data.map((s) => s.projectCount), 1);
 
@@ -11,18 +13,23 @@ function StageBarChart({ data, title }) {
         <div className="stage-bars-y-label">Count</div>
         <div className="stage-bars-content">
         <div className="stage-bars-grid">
-          {data.map((stage, i) => (
+          {data.map((stage, i) => {
+            const barHeightPx = maxCount
+              ? Math.max(4, Math.round((stage.projectCount / maxCount) * BAR_MAX_HEIGHT_PX))
+              : 0;
+            return (
             <div key={stage.stageName || i} className="stage-bar-col">
-              <div
-                className="stage-bar"
-                style={{
-                  height: maxCount ? `${Math.max(4, (stage.projectCount / maxCount) * 100)}%` : "0%",
-                }}
-                title={`${stage.stageName}: ${stage.projectCount}`}
-              ></div>
+              <div className="stage-bar-track">
+                <div
+                  className="stage-bar"
+                  style={{ height: `${barHeightPx}px` }}
+                  title={`${stage.stageName}: ${stage.projectCount}`}
+                ></div>
+              </div>
               <div className="stage-bar-val">{stage.projectCount}</div>
             </div>
-          ))}
+          );
+          })}
         </div>
         <div className="stage-bars-x-labels">
           {data.map((stage, i) => (
@@ -83,9 +90,11 @@ export default function GateReadinessSummary() {
           Program readiness by gate plus design maturity & qualification yields.
         </div>
 
+        <div className="gate-panel-scroll-x">
         <div className="gate-charts-row">
           <StageBarChart data={current} title="Active projects by stage (current)" />
           <StageBarChart data={oneMonthAgo} title="Active projects by stage (1 month ago)" />
+        </div>
         </div>
 
         <div className="maturity-grid">

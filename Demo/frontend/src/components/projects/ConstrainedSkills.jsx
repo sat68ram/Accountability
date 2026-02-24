@@ -31,6 +31,7 @@ export default function ConstrainedSkills() {
         Skills driving schedule risk in the next two quarters.
       </div>
 
+      <div className="panel-scroll-content">
       <div className="skill-list">
         {rows.length > 0 ? (
           rows.map((row, i) => {
@@ -52,6 +53,7 @@ export default function ConstrainedSkills() {
             <div>--</div>
           </div>
         )}
+      </div>
       </div>
     </section>
   );

@@ -115,6 +115,7 @@ export default function SlippageCriticalPath() {
         </svg>
       </div>
 
+      <div className="panel-scroll-content">
       <table className="table-small">
         <thead>
           <tr>
@@ -149,6 +150,7 @@ export default function SlippageCriticalPath() {
           )}
         </tbody>
       </table>
+      </div>
     </section>
   );
 }
